@@ -91,12 +91,18 @@
 }
 
 .navWrapper :global(.button):hover {
-    color: var(--brand-text-on);
+    color: var(--brand-text-on) !important;
 }
 
 /* Active (currently selected) tab */
 .navBtnActive {
-    color: var(--brand-text-on);
+    --neutral-on-background-strong: var(--brand-text-on);
+    --neutral-on-background-medium: var(--brand-text-on);
+    color: var(--brand-text-on) !important;
+}
+
+.navBtnActive :global(*) {
+    color: var(--brand-text-on) !important;
 }
 
 

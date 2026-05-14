@@ -31,7 +31,7 @@
 
 [data-theme="light"] {
   --portfolio-card-bg:    #ffffff;              /* card fill in light mode  */
-  --portfolio-name-color: var(--brand-primary); /* name text in light mode  */
+  --portfolio-name-color: #ffffff;              /* name text in light mode  */
   --portfolio-border:     var(--brand-primary); /* left card border (light) */
 }
 
