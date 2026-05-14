@@ -1,0 +1,526 @@
+/* ================================================================
+   PORTFOLIO THEME — Edit this file to customize your portfolio.
+   You do NOT need to touch any other file for basic changes.
+   ================================================================
+
+
+   QUICK START
+   ───────────
+   1. Change --brand-primary   → your main accent color
+   2. Change --brand-primary-dark → a slightly darker shade of it
+   3. Adjust light/dark card backgrounds in Section 2 if needed
+   That's it for 90 % of customizations.
+
+   ================================================================ */
+
+
+/* ── SECTION 1: BRAND COLORS ─────────────────────────────────────
+   These three variables control the accent color everywhere:
+   navbar active state, card borders, buttons, links.             */
+
+:root {
+  --brand-primary:      #003262;  /* main accent (e.g. navy, teal, purple…) */
+  --brand-primary-dark: #00234a;  /* hover/pressed — slightly darker shade   */
+  --brand-text-on:      #ffffff;  /* text drawn ON TOP of the brand color    */
+}
+
+
+/* ── SECTION 2: LIGHT / DARK MODE ───────────────────────────────
+   Adjust card background and name color for each theme.
+   The brand variables above are reused here automatically.       */
+
+[data-theme="light"] {
+  --portfolio-card-bg:    #ffffff;              /* card fill in light mode  */
+  --portfolio-name-color: var(--brand-primary); /* name text in light mode  */
+  --portfolio-border:     var(--brand-primary); /* left card border (light) */
+}
+
+[data-theme="dark"] {
+  --portfolio-card-bg:    #0f0f0f;              /* card fill in dark mode   */
+  --portfolio-name-color: #ffffff;              /* name text in dark mode   */
+  --portfolio-border:     var(--brand-primary); /* left card border (dark)  */
+}
+
+
+/* ── SECTION 3: CARD STYLE ───────────────────────────────────────
+   .page-card is applied to every card on every page.
+   Change width, border thickness, or remove the border here.    */
+
+.page-card {
+  width: 80%;
+  border-top: 4px solid var(--portfolio-border);
+  background-color: var(--portfolio-card-bg);
+}
+
+
+/* ── SECTION 4: SOCIAL BUTTONS ───────────────────────────────────
+   The link buttons (GitHub, LinkedIn, etc.) on the profile card. */
+
+.social-buttons .button {
+  background-color: var(--brand-primary) !important;
+  color:            var(--brand-text-on) !important;
+  border-color:     var(--brand-primary) !important;
+}
+
+.social-buttons .button:hover {
+  background-color: var(--brand-primary-dark) !important;
+  border-color:     var(--brand-primary-dark) !important;
+}
+
+
+/* ── SECTION 5: MOBILE / RESPONSIVE (≤ 768 px) ──────────────────
+   Adjustments for phones and small tablets.
+   You usually don't need to edit this section.                   */
+
+@media (max-width: 768px) {
+  /* Cards go full-width on mobile */
+  .page-card {
+    width: 100%;
+    border-radius: 0 !important;
+  }
+
+  /* Push page content above the fixed bottom navbar.
+     env(safe-area-inset-bottom) adds clearance for the iPhone home bar. */
+  body {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+
+/* ── SECTION 6: HEADER OFFSET ────────────────────────────────────
+   Pushes page content below the fixed profile card + navbar.
+   Increase this value if content overlaps the fixed header.      */
+
+.header-offset {
+  height: 360px; /* profile card (~280px) + gaps (~36px) + navbar (~44px) */
+}
+
+@media (max-width: 768px) {
+  .header-offset {
+    height: 0; /* on mobile, profile card scrolls normally */
+  }
+}
+
+
+/* ── SECTION 7: GLOBAL FIXES ─────────────────────────────────────
+   Prevents horizontal scrollbar caused by animations/transitions. */
+
+/* overflow-x: clip on html only — body must stay visible for position:sticky to work */
+html {
+  overflow-x: clip;
+}
+body {
+  max-width: 100%;
+}
+
+
+/* ── SECTION 7: ADVANCED — ONCE UI DESIGN TOKENS ─────────────────
+   Uncomment lines below to override global font size scaling.    */
+
+/*
+:root {
+  --font-size-display-multiplier: 1;
+  --font-size-heading-multiplier: 1;
+  --font-size-body-multiplier:    1;
+  --font-size-label-multiplier:   1;
+}
+*/
+
+
+/* ── SECTION 8: COMPONENT STYLES ─────────────────────────────────
+   These replace inline style="" attributes across the codebase.
+   Do not remove — deleting a class here will break its component. */
+
+/* Card title bar (top strip with heading) */
+.card-header { padding: 20px 24px 16px; }
+
+/* Card content body (inner padding for most cards) */
+.card-body { padding: 8px 24px 24px; }
+
+/* Card content body — padded variant (blogs / latest / credentials) */
+.card-body-padded { padding: 24px; }
+
+/* Separator line between items inside a card */
+.card-divider { margin: 16px 0; }
+
+/* Items list: the first item gets 16 px top padding via :first-child;
+   all others get 0 so the divider alone provides spacing.         */
+.card-section-items > :first-child .card-item-inner { padding-top: 16px; }
+.card-item-inner { padding-top: 0; }
+
+/* Main page column: 80% on desktop, 100% on mobile */
+.content-width { width: 80%; }
+@media (max-width: 768px) { .content-width { width: 100%; } }
+
+/* Publications subtitle */
+.italic { font-style: italic; }
+
+/* Bio / intro paragraph */
+.bio-text { text-align: justify; }
+
+/* Work article — centred with auto margins */
+.margin-auto { margin: auto; }
+
+/* MDX paragraph / list-item line height */
+.mdx-text { line-height: 175%; }
+
+/* Project card links */
+.project-link { margin: 0 !important; width: fit-content !important; }
+
+/* Footer inner row */
+.footer-inner { width: 80%; }
+@media (max-width: 768px) { .footer-inner { width: 100%; } }
+
+/* Footer mobile spacer (clears the fixed bottom navbar) */
+.footer-mobile-spacer { min-height: 72px; }
+
+/* Profile card text */
+.profile-text { font-size: 16px !important; }
+
+/* Profile card right-side spacer column */
+.profile-card-spacer { padding: 20px; min-width: 140px; flex-shrink: 0; }
+
+/* Theme toggle button — static styles; color & transform stay inline (dynamic) */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  line-height: 0;
+}
+
+/* Table of contents sidebar */
+.toc-container { top: 50%; transform: translateY(-50%); white-space: nowrap; }
+.toc-sub-item  { cursor: pointer; }
+
+/* Navbar tab rows (each tab cell fills equal width) */
+.nav-tab-row { flex: 1; }
+
+/* Navbar inner header row — zero out Once UI default padding */
+.nav-header-inner { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+/* Navbar pill width: 80% desktop, 100% mobile (SCSS handles tablet at 95%) */
+.nav-pill-width { width: 80%; }
+
+
+/* ── SECTION 9: ABOUT PAGE ───────────────────────────────────────── */
+
+/* Research Interest heading */
+.research-heading {}
+
+/* Research interest tag row */
+.research-tags {}
+
+/* Individual research interest tag */
+.research-tag {}
+
+
+/* ── SECTION 10: LATEST / NEWS PAGE ─────────────────────────────── */
+
+/* "News" card heading */
+.news-heading {}
+
+/* Date column (e.g. "Jan 2024") */
+.news-date {}
+
+/* Each news row */
+.news-item-row {}
+
+/* News item description text */
+.news-content {}
+
+/* NEW! badge tag */
+.news-badge-new {}
+
+/* Category tag (shared) */
+.news-category {}
+
+/* Per-category tag colors */
+.news-cat-paper       {}
+.news-cat-award       {}
+.news-cat-milestone   {}
+.news-cat-talk        {}
+.news-cat-recognition {}
+.news-cat-service     {}
+
+
+/* ── SECTION 11: EXPERIENCES PAGE ───────────────────────────────── */
+
+/* Individual experience item */
+.exp-item        {}
+.exp-company     {}
+.exp-timeframe   {}
+.exp-role        {}
+.exp-achievements {}
+
+
+/* ── SECTION 12: PUBLICATIONS PAGE ──────────────────────────────── */
+
+/* Page title / subtitle */
+.pub-page-title {}
+.pub-subtitle   {}
+
+/* Filter + search combined row */
+.pub-filters      { padding: 12px 24px; }
+.pub-filter-pills { flex-shrink: 0; }
+
+/* Individual filter button — styled as a pill */
+.pub-filter-btn {
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: inherit;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.pub-filter-btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+.pub-filter-active {
+  background: var(--brand-primary) !important;
+  color: var(--brand-text-on) !important;
+  border-color: var(--brand-primary) !important;
+}
+
+/* Search input — inline with filter pills */
+.pub-search-input {
+  width: 200px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 35%, transparent);
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  outline: none;
+  flex-shrink: 0;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pub-search-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-primary) 12%, transparent);
+}
+@media (max-width: 768px) {
+  .pub-filters    { flex-wrap: wrap; }
+  .pub-search-input { width: 100%; }
+}
+
+/* Year + papers two-column row */
+.pub-year-group { padding-top: 20px; padding-bottom: 20px; align-items: flex-start; }
+
+/* Year label column (fixed width) */
+.pub-year-col { width: 56px; flex-shrink: 0; }
+.pub-year-num { color: var(--brand-primary); }
+
+/* Divider between papers within the same year */
+.pub-paper-divider { margin: 16px 0; }
+
+/* Empty state */
+.pub-empty {}
+
+/* Individual publication item */
+.pub-item {}
+
+/* Title */
+.pub-title {}
+
+/* Own name bolded in accent color */
+.pub-my-name { color: var(--brand-primary); }
+
+/* Authors */
+.pub-authors {}
+
+/* Venue (italic) */
+.pub-venue {}
+
+/* Type tag */
+.pub-type-tag          {}
+.pub-type-journal      {}
+.pub-type-conference   {}
+.pub-type-preprint     {}
+.pub-type-book-chapter {}
+
+/* Link buttons (ARXIV, CODE, PDF, DOI, SLIDES…) */
+.pub-links {}
+.pub-link-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--brand-primary);
+  color: var(--brand-primary) !important;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  transition: background 0.15s, color 0.15s;
+}
+.pub-link-btn:hover {
+  background: var(--brand-primary);
+  color: var(--brand-text-on) !important;
+}
+
+
+/* ── SECTION 13: BLOGS PAGE ─────────────────────────────────────── */
+
+.blog-list-row {
+  padding: 16px 24px;
+  transition: background 0.15s;
+}
+.blog-list-row:hover {
+  background: color-mix(in srgb, var(--brand-primary) 6%, transparent);
+}
+.blog-list-date {
+  font-variant-numeric: tabular-nums;
+  min-width: 88px;
+}
+
+
+/* ── SECTION 14: GALLERY ─────────────────────────────────────────── */
+
+.gallery-card  { background: var(--portfolio-card-bg); cursor: pointer; transition: transform 0.18s, box-shadow 0.18s; }
+.gallery-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.gallery-caption { padding: 10px 14px 12px; }
+
+/* Lightbox backdrop */
+.lb-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Counter top-left */
+.lb-counter {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+/* Shared button base */
+.lb-btn {
+  position: absolute;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.15s, transform 0.15s;
+}
+.lb-btn:hover { background: rgba(255,255,255,0.18); }
+
+/* Close button */
+.lb-close {
+  top: 16px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nav arrows */
+.lb-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 64px;
+  border-radius: 8px;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lb-arrow:hover { transform: translateY(-50%) scale(1.08); }
+.lb-arrow-left  { left: 20px; }
+.lb-arrow-right { right: 20px; }
+
+/* Image + caption container */
+.lb-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(90vw, 900px);
+  max-height: 90vh;
+}
+.lb-img {
+  display: block;
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Caption strip */
+.lb-caption-box {
+  width: 100%;
+  padding: 12px 4px 0;
+  text-align: center;
+}
+.lb-caption-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+.lb-caption-loc {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+  .lb-arrow { width: 36px; height: 48px; font-size: 28px; }
+  .lb-arrow-left  { left: 8px; }
+  .lb-arrow-right { right: 8px; }
+}
+
+/* ─── Blog post page ─────────────────────────────────────────────────────── */
+.blog-post-layout {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-post-body {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.blog-post-article {
+  flex: 7;
+  min-width: 0;
+}
+
+.blog-post-toc {
+  flex: 3;
+  position: sticky;
+  top: 104px;
+  max-height: calc(100vh - 124px);
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .blog-post-layout { width: 100%; padding: 0 16px; }
+  .blog-post-body   { flex-direction: column; }
+  .blog-post-toc    { position: static; width: 100%; order: -1; }
+}

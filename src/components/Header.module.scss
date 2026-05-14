@@ -1,0 +1,127 @@
+@use "./breakpoints.scss" as bp;
+
+/* ================================================================
+   NAVBAR STYLES
+   Colors  → change in custom.css  (Section 1 brand variables)
+   Layout  → change the values in this file
+   ================================================================ */
+
+
+/* ── Position ────────────────────────────────────────────────────
+   .position  = default: flows with the page (normal layout)
+   .stuck     = applied by JS once the profile card scrolls away:
+                the navbar lifts out of flow and pins to the top.  */
+
+.position {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 9;
+}
+
+.stuck {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+
+/* Tablet (769 – 1024 px): slightly wider navbar pill */
+@media (min-width: calc(bp.$s + 1px)) and (max-width: bp.$m) {
+    .navPill {
+        width: 95% !important;
+    }
+}
+
+/* Mobile (≤ 768 px): full-width bar pinned to the bottom edge.
+   Always fixed regardless of the JS stuck state.                */
+@media (max-width: bp.$s) {
+
+    .position,
+    .position.stuck {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-top: 0 !important;
+        /* Extra clearance for iPhone home indicator */
+        padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    }
+
+    /* Remove pill shape so bar spans edge-to-edge */
+    .navPill {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+    }
+
+    /* Larger touch targets on mobile (min 44 px recommended) */
+    .navWrapper :global(.button) {
+        min-height: 52px !important;
+        font-size: 11px !important;
+    }
+}
+
+
+/* ── Tab buttons ─────────────────────────────────────────────────
+   Each button stretches to fill its cell and the full bar height. */
+
+.navWrapper {
+    align-items: stretch;
+}
+
+.navWrapper :global(.button) {
+    /* Override Once UI hover-color tokens with the brand color */
+    --neutral-alpha-weak:   var(--brand-primary);
+    --neutral-alpha-medium: var(--brand-primary);
+
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 44px !important;
+    border-radius: 0 !important;
+    justify-content: center !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.navWrapper :global(.button):hover {
+    color: var(--brand-text-on);
+}
+
+/* Active (currently selected) tab */
+.navBtnActive {
+    color: var(--brand-text-on);
+}
+
+
+/* ── Theme-toggle button ─────────────────────────────────────────
+   Kept at its natural size instead of stretching like a tab.     */
+
+.themeToggle {
+    flex-shrink: 0;
+
+    :global(.button) {
+        width: auto !important;
+        height: auto !important;
+        min-height: var(--static-space-32) !important;
+        border-radius: var(--radius-m) !important;
+        padding: var(--static-space-4) var(--static-space-8) !important;
+    }
+}
+
+/* Icon color follows the active theme */
+:global([data-theme="light"]) .themeToggle :global(.button) {
+    --neutral-on-background-strong: #000000;
+    --neutral-on-background-medium: #000000;
+}
+
+:global([data-theme="dark"]) .themeToggle :global(.button) {
+    --neutral-on-background-strong: #ffffff;
+    --neutral-on-background-medium: #ffffff;
+}

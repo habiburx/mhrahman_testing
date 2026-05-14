@@ -1,0 +1,86 @@
+---
+title: "A Primer on Adversarial Robustness in Deep Learning"
+subtitle: "Why neural networks fail on imperceptible perturbations — and what we can do about it"
+summary: "An introduction to adversarial examples, why they exist, and the main defense strategies researchers are exploring today."
+publishedAt: "2026-05-14"
+tag: "AI Security"
+---
+
+## What Are Adversarial Examples?
+
+Deep neural networks are remarkably accurate — until they are not. An **adversarial example** is an input that has been deliberately perturbed by a tiny, often imperceptible amount to cause a model to make the wrong prediction with high confidence.
+
+The classic demonstration: take an image of a panda, add a carefully crafted noise pattern, and a state-of-the-art classifier suddenly outputs "gibbon" — with 99% confidence — even though a human cannot tell the difference.
+
+## Why Does This Happen?
+
+The short answer is that neural networks learn to rely on high-frequency features that are invisible to humans but highly predictive in a statistical sense. Because training optimizes for average-case accuracy, the model's decision boundary can be very close to the data manifold in directions humans do not perceive.
+
+More formally, given a model $f$ and an input $x$ with true label $y$, an adversary finds a perturbation $\delta$ such that:
+
+- $\|\delta\|_p \leq \epsilon$ (the perturbation is small under some norm)
+- $f(x + \delta) \neq y$ (the model is fooled)
+
+Common choices are the $L_\infty$ norm (every pixel changes by at most $\epsilon$) and the $L_2$ norm (total Euclidean distance is bounded).
+
+## Common Attack Methods
+
+### FGSM — Fast Gradient Sign Method
+
+The simplest attack, introduced by Goodfellow et al. (2014):
+
+```python
+delta = epsilon * torch.sign(grad_x)
+x_adv = x + delta
+```
+
+One step in the direction that increases the loss the most. Fast, but weak.
+
+### PGD — Projected Gradient Descent
+
+Madry et al. (2018) showed that iterating FGSM with a projection step produces much stronger attacks:
+
+```python
+x_adv = x.clone()
+for _ in range(steps):
+    loss = criterion(model(x_adv), y)
+    loss.backward()
+    x_adv = x_adv + alpha * x_adv.grad.sign()
+    x_adv = project(x_adv, x, epsilon)   # clip back into ball
+    x_adv = x_adv.detach().requires_grad_(True)
+```
+
+PGD is the de-facto standard for evaluating robustness.
+
+## Defense Strategies
+
+### Adversarial Training
+
+The most reliable defense so far: include adversarial examples in the training set.
+
+```
+min_θ  𝔼[(x,y)~D]  max_{‖δ‖≤ε}  L(f_θ(x+δ), y)
+```
+
+The inner maximization generates hard examples; the outer minimization learns to classify them correctly. The trade-off is a drop in clean accuracy and higher training cost.
+
+### Certified Defenses
+
+Rather than hoping a defense is robust, **certified** methods provide a mathematical guarantee: for every input within a ball of radius $\epsilon$, the prediction is provably constant. Randomized smoothing (Cohen et al., 2019) is the leading scalable approach.
+
+### Input Preprocessing
+
+Techniques like feature squeezing, JPEG compression, and input denoising can reduce the effectiveness of attacks — but are generally broken by adaptive adversaries who know the preprocessing step.
+
+## Open Problems
+
+- **Robustness vs. accuracy trade-off** — certified robust models are still significantly less accurate on clean data.
+- **Semantic attacks** — perturbations that are invisible under $L_p$ norms but clearly visible to humans (e.g., rotation, color shift) remain understudied.
+- **Real-world attacks** — most results are in the white-box, digital setting. Physical-world robustness under distribution shift is an open challenge.
+
+## Further Reading
+
+- Szegedy et al., *Intriguing Properties of Neural Networks* (2014)
+- Goodfellow et al., *Explaining and Harnessing Adversarial Examples* (2015)
+- Madry et al., *Towards Deep Learning Models Resistant to Adversarial Attacks* (2018)
+- Cohen et al., *Certified Adversarial Robustness via Randomized Smoothing* (2019)
