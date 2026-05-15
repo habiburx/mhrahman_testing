@@ -19,19 +19,24 @@ const latestPageContent = {
  */
 const newsItems: NewsItem[] = [
   {
+    date: "Apr '26",
+    category: "EVENT",
+    content: <>Attended CCI Symposium 2026 in Richmond, VA.</>,
+  },
+  {
     date: "Jan '26",
     category: "MILESTONE",
     content: <>Started PhD in Computer Science at Old Dominion University.</>,
   },
   {
-    date: "Feb '26",
-    category: "SERVICE",
-    content: <>Joined Institute of Science and Technology, Dhanmondi as a Lecturer.</>,
-  },
-  {
     date: "Dec '25",
     category: "SERVICE",
     content: <>Currently serving as a Lecturer and is on study leave for higher studies.</>,
+  },
+  {
+    date: "Feb '25",
+    category: "SERVICE",
+    content: <>Joined Institute of Science and Technology, Dhanmondi as a Lecturer.</>,
   },
 ];
 

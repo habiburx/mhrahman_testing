@@ -15,7 +15,7 @@ const person: Person = {
   firstName: "Md Habibur",
   lastName: "Rahman",
   name: "Md Habibur Rahman",
-  role: "PhD Student in CS @ ODU | AI Security Researcher",
+  role: "PhD Student | AI Security Researcher",
   avatar: "/images/mhrahman.webp",
   avatarAlt: "Md Habibur Rahman profile photo",
   avatarFit: "cover",
@@ -25,6 +25,8 @@ const person: Person = {
   email: "mrahm015@odu.edu",
   personalEmail: "mhrahman.cs@gmail.com",
   address: "Norfolk, VA, United States of America",
+  nickname: "Habib",
+  cv: "#", // ← replace "#" with your CV link when ready
   // location: "America/New_York", // IANA time zone identifier — uncomment to show local time
   languages: [], // e.g. ["English", "Bengali"] — leave empty to hide
 };

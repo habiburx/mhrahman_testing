@@ -37,6 +37,10 @@ export type Person = {
   personalEmail?: string;
   /** Mailing address */
   address?: string;
+  /** Nickname displayed as a badge next to the name */
+  nickname?: string;
+  /** Link to CV / résumé PDF */
+  cv?: string;
   /** IANA time zone location */
   location?: IANATimeZone;
   /** Languages spoken */

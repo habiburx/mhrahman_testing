@@ -6,10 +6,10 @@ import type { Award, Certification } from "../types/credentials.types";
 function BulletRow({ title, organization }: Award | Certification) {
   return (
     <Row fillWidth gap="16" vertical="start" className="card-item-inner">
-      <Text variant="body-default-m" onBackground="neutral-weak">
+      <Text variant="body-default-m" className="exp-bullet">
         ·
       </Text>
-      <Text variant="body-default-s">
+      <Text variant="body-default-s" className="exp-company">
         <strong>{title}</strong>, {organization}
       </Text>
     </Row>
@@ -35,7 +35,7 @@ export function CredentialsList() {
     <>
       {/* Awards */}
       <Column className="card-header">
-        <Heading as="h2" variant="heading-strong-l">
+        <Heading as="h2" variant="heading-strong-l" className="cred-section-heading">
           {credentialsPageContent.awardsTitle}
         </Heading>
       </Column>
@@ -55,7 +55,7 @@ export function CredentialsList() {
       {/* Certifications */}
       <Line background="neutral-alpha-weak" />
       <Column className="card-header">
-        <Heading as="h2" variant="heading-strong-l">
+        <Heading as="h2" variant="heading-strong-l" className="cred-section-heading">
           {credentialsPageContent.certificationsTitle}
         </Heading>
       </Column>

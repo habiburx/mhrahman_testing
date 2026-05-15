@@ -89,6 +89,66 @@
     transform: translateY(-1px);
 }
 
+/* CV icon button next to the name — matches name size */
+.cvIconBtn {
+    color: var(--portfolio-name-color) !important;
+    flex-shrink: 0;
+    width: 40px !important;
+    height: 40px !important;
+
+    svg {
+        width: 28px !important;
+        height: 28px !important;
+        color: var(--portfolio-name-color) !important;
+    }
+
+    &:hover {
+        background: color-mix(in srgb, var(--portfolio-border) 12%, transparent) !important;
+        color: var(--portfolio-name-color) !important;
+    }
+
+    @include bp.s {
+        width: 34px !important;
+        height: 34px !important;
+
+        svg {
+            width: 22px !important;
+            height: 22px !important;
+        }
+    }
+}
+
+/* Inline nickname — e.g. "Md Habibur Rahman (Habib)" */
+.nickname {
+    color: var(--portfolio-border);
+    font-weight: 600;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+/* CV button row */
+.cvRow {
+    @include bp.s {
+        justify-content: center;
+    }
+}
+
+.cvButton {
+    border: 2px dashed var(--portfolio-border) !important;
+    border-radius: 10px !important;
+    color: var(--portfolio-name-color) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    background: color-mix(in srgb, var(--portfolio-border) 5%, transparent) !important;
+    transition: background 0.2s ease, color 0.2s ease, border-style 0.2s ease !important;
+
+    &:hover {
+        border-style: solid !important;
+        background: var(--portfolio-border) !important;
+        color: var(--brand-text-on) !important;
+    }
+}
+
 /* Name heading */
 .name {
     font-size: 34px;

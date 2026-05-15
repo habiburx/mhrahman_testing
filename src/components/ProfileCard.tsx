@@ -1,5 +1,5 @@
 import { person, social } from "@/resources";
-import { Button, Column, Row, SmartLink, Text } from "@once-ui-system/core";
+import { Button, Column, IconButton, Row, SmartLink, Text } from "@once-ui-system/core";
 import styles from "./ProfileCard.module.scss";
 import { ScholarStats } from "./ScholarStats";
 
@@ -28,7 +28,24 @@ export function ProfileCard() {
 
       {/* Name, role, contact info, social buttons */}
       <Column gap="8" fillWidth vertical="center" className={styles.info}>
-        <Text className={styles.name}>{person.name}</Text>
+        <Row vertical="center" gap="8" wrap>
+          <Text className={styles.name}>
+            {person.name}
+            {person.nickname && (
+              <span className={styles.nickname}> ({person.nickname})</span>
+            )}
+          </Text>
+          {person.cv && (
+            <IconButton
+              href={person.cv}
+              icon="document"
+              size="m"
+              variant="ghost"
+              tooltip="Curriculum Vitae"
+              className={styles.cvIconBtn}
+            />
+          )}
+        </Row>
         <Text className="profile-text" onBackground="neutral-weak">
           {person.role}
         </Text>

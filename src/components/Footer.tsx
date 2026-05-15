@@ -25,7 +25,7 @@ export const Footer = () => {
           {" "}{new Date().getFullYear()}
         </Text>
 
-        {/* Non-essential social icon links (essential ones live on the profile card) */}
+        {/* Social icon links + CV */}
         <Row gap="8" wrap horizontal="center">
           {footerLinks.map((item) => (
             <IconButton
@@ -38,6 +38,16 @@ export const Footer = () => {
               className="footer-icon"
             />
           ))}
+          {person.cv && (
+            <IconButton
+              href={person.cv}
+              icon="document"
+              tooltip="Curriculum Vitae"
+              size="s"
+              variant="ghost"
+              className="footer-icon"
+            />
+          )}
         </Row>
       </Row>
 

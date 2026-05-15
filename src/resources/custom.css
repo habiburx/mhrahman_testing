@@ -123,6 +123,11 @@
     display: none !important;
   }
 
+  /* Remove top gap above profile card on mobile */
+  .profile-card-wrapper {
+    padding-top: 0 !important;
+  }
+
   /* Publications: stack year label above papers on mobile */
   .pub-year-group {
     flex-direction: column !important;
@@ -253,6 +258,7 @@ body {
 /* Publications subtitle */
 .italic {
   font-style: italic;
+  font-weight: 500;
 }
 
 /* Bio / intro paragraph */
@@ -414,7 +420,7 @@ body {
 }
 
 .news-item-row:hover {
-  background: color-mix(in srgb, var(--portfolio-border) 5%, transparent);
+  background: color-mix(in srgb, var(--portfolio-border) 8%, transparent);
 }
 
 .news-bullet {
@@ -458,12 +464,17 @@ body {
   font-weight: 500;
 }
 
+.exp-role {
+  font-weight: 500;
+}
+
 .exp-timeframe {
   font-weight: 600;
   color: var(--portfolio-border) !important;
 }
 
-.exp-section-heading {
+.exp-section-heading,
+.cred-section-heading {
   font-weight: 900 !important;
   line-height: 1.18 !important;
   color: var(--portfolio-name-color) !important;
@@ -517,9 +528,13 @@ body {
   background: transparent;
   color: inherit;
   font-size: 13px;
+  font-weight: 500;
   outline: none;
   flex-shrink: 0;
   transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pub-search-input::placeholder {
+  color: color-mix(in srgb, currentColor 40%, transparent);
 }
 .pub-search-input:focus {
   border-color: var(--brand-primary);
@@ -612,7 +627,7 @@ body {
   transition: background 0.15s;
 }
 .blog-list-row:hover {
-  background: color-mix(in srgb, var(--portfolio-border) 5%, transparent);
+  background: color-mix(in srgb, var(--portfolio-border) 8%, transparent);
 }
 .blog-list-content {
   min-width: 0;
@@ -759,6 +774,7 @@ body {
 .lb-caption-loc {
   margin: 0;
   font-size: 12px;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.5);
 }
 
