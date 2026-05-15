@@ -134,7 +134,7 @@ export function PublicationsView() {
                           {pub.title}
                         </Text>
                         {pub.keywords && pub.keywords.length > 0 && (
-                          <Row gap="6" wrap className="pub-keywords">
+                          <Row gap="8" wrap className="pub-keywords">
                             {pub.keywords.map((kw) => (
                               <span key={kw} className="pub-keyword-tag">{kw}</span>
                             ))}
