@@ -1,4 +1,4 @@
-import { person, social } from "@/resources";
+import { person, social } from "@/features/profile-card/profile-card.config";
 import { IconButton, Row, SmartLink, Text } from "@once-ui-system/core";
 
 export const Footer = () => {
