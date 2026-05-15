@@ -45,6 +45,55 @@
   --portfolio-border: #7cc7e8; /* card accent in dark mode */
 }
 
+/* ========================= PHOTO CARD START ========================= */
+
+/* Profile card text */
+.profile-text {
+  font-size: 15px !important;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+/* Profile card right-side spacer column */
+.profile-card-spacer {
+  padding: 20px;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.profile-card-wrapper {
+  padding-top: 5px !important;
+}
+
+@media (max-width: 768px) {
+  /* Prevent long email addresses from overflowing the profile card */
+  .profile-text a {
+    word-break: break-all;
+  }
+
+  /* Social buttons: wrap cleanly and shrink label font on very small screens */
+  .social-buttons {
+    justify-content: center;
+  }
+  .social-buttons .button {
+    font-size: 11px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  /* Profile card right-side spacer: hide on mobile (layout is column) */
+  .profile-card-spacer {
+    display: none !important;
+  }
+
+  /* Remove top gap above profile card on mobile */
+  .profile-card-wrapper {
+    padding-top: 0 !important;
+  }
+}
+
+/* ========================== PHOTO CARD END ========================== */
+
 /* ── SECTION 3: CARD STYLE ───────────────────────────────────────
    .page-card is applied to every card on every page.
    Change width, border thickness, or remove the border here.    */
@@ -81,9 +130,6 @@
   }
 }
 
-/* ── SECTION 4: SOCIAL BUTTONS ───────────────────────────────────
-   Social button styles are in ProfileCard.module.scss (.socialButton) */
-
 /* ── SECTION 5: MOBILE / RESPONSIVE (≤ 768 px) ──────────────────
    Adjustments for phones and small tablets.
    You usually don't need to edit this section.                   */
@@ -101,21 +147,6 @@
     padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
   }
 
-  /* Prevent long email addresses from overflowing the profile card */
-  .profile-text a {
-    word-break: break-all;
-  }
-
-  /* Social buttons: wrap cleanly and shrink label font on very small screens */
-  .social-buttons {
-    justify-content: center;
-  }
-  .social-buttons .button {
-    font-size: 11px !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
-
   /* Footer: ensure icon row wraps and stays centered */
   .footer-inner {
     align-items: center !important;
@@ -130,16 +161,6 @@
   }
   .card-header {
     padding: 16px 16px 12px !important;
-  }
-
-  /* Profile card right-side spacer: hide on mobile (layout is column) */
-  .profile-card-spacer {
-    display: none !important;
-  }
-
-  /* Remove top gap above profile card on mobile */
-  .profile-card-wrapper {
-    padding-top: 0 !important;
   }
 
   /* Publications: stack year label above papers on mobile */
@@ -450,24 +471,6 @@ body {
 /* Footer mobile spacer (clears the fixed bottom navbar) */
 .footer-mobile-spacer {
   min-height: 72px;
-}
-
-/* Profile card text */
-.profile-text {
-  font-size: 15px !important;
-  font-weight: 500;
-  line-height: 1.55;
-}
-
-/* Profile card right-side spacer column */
-.profile-card-spacer {
-  padding: 20px;
-  min-width: 140px;
-  flex-shrink: 0;
-}
-
-.profile-card-wrapper {
-  padding-top: 5px !important;
 }
 
 /* Theme toggle button — static styles; color & transform stay inline (dynamic) */

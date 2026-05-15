@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./ScholarStats.module.scss";
+import styles from "../styles/ScholarStats.module.scss";
 
 type ScholarMetrics = {
   citations: string;

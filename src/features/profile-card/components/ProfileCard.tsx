@@ -1,6 +1,6 @@
-import { person, social } from "@/resources";
 import { Button, Column, IconButton, Row, SmartLink, Text } from "@once-ui-system/core";
-import styles from "./ProfileCard.module.scss";
+import { person, social } from "../profile-card.config";
+import styles from "../styles/ProfileCard.module.scss";
 import { ScholarStats } from "./ScholarStats";
 
 export function ProfileCard() {

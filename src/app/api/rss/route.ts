@@ -24,7 +24,7 @@ export async function GET() {
     <managingEditor>${feedEmail} (${person.name})</managingEditor>
     <webMaster>${feedEmail} (${person.name})</webMaster>
     <image>
-      <url>${baseURL}${person.avatar || "/images/mhrahman.webp"}</url>
+      <url>${baseURL}${person.avatar || "/images/profile/mhrahman.webp"}</url>
       <title>${blogs.title}</title>
       <link>${baseURL}${blogs.path}</link>
     </image>

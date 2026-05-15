@@ -177,10 +177,10 @@ These control the main brand color, button hover color, text on brand background
 
 Replace these files when personalizing:
 
-- `public/images/mhrahman.webp`
+- `public/images/profile/mhrahman.webp`
 - files inside `public/images/gallery/`
 
-If you change filenames, update the matching paths in `src/resources/content.tsx`.
+If you change filenames, update the matching paths in `src/features/profile-card/profile-card.config.ts` or `src/resources/content.tsx`.
 
 ## Environment Variables
 
