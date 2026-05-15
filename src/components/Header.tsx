@@ -192,28 +192,27 @@ export const Header = () => {
                 <>
                   <Line background="neutral-alpha-medium" vert />
                   <Row
-                    s={{ hide: true }}
                     paddingX="8"
                     vertical="center"
-                    className={styles.themeToggle}
+                    className={`${styles.themeToggle} ${styles.desktopThemeRow}`}
                   >
                     <ThemeToggle />
                   </Row>
                   <Row
-                    hide
-                    s={{ hide: false }}
                     paddingX="8"
-                    gap="4"
                     vertical="center"
-                    className={styles.themeToggle}
+                    className={styles.mobileThemeRow}
                   >
                     <ThemeToggle />
-                    <IconButton
-                      icon="arrowUp"
-                      variant="ghost"
-                      size="s"
-                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                    />
+                    <Line background="neutral-alpha-medium" vert />
+                    <span className={styles.arrowUpBtn}>
+                      <IconButton
+                        icon="arrowUp"
+                        variant="ghost"
+                        size="s"
+                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      />
+                    </span>
                   </Row>
                 </>
               )}

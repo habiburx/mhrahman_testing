@@ -106,32 +106,39 @@
 }
 
 
-/* ── Theme-toggle button ─────────────────────────────────────────
-   Kept at its natural size instead of stretching like a tab.     */
-
-.themeToggle {
-    flex-shrink: 0;
-    display: flex;
+/* ── Desktop-only theme toggle (hidden on mobile) ───────────────*/
+.desktopThemeRow {
+    display: flex !important;
     align-items: center;
-    gap: 2px;
+    flex-shrink: 0;
 
+    @include bp.s {
+        display: none !important;
+    }
+}
+
+/* ── Mobile-only row (ThemeToggle + arrowUp) ────────────────────*/
+.mobileThemeRow {
+    display: none !important;
+
+    @include bp.s {
+        display: flex !important;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+}
+
+/* ── Theme-toggle button sizing ─────────────────────────────────*/
+.themeToggle {
     :global(.button) {
         width: auto !important;
         height: auto !important;
         min-height: var(--static-space-32) !important;
         border-radius: var(--radius-m) !important;
         padding: var(--static-space-4) var(--static-space-8) !important;
-    }
-
-    /* On mobile, keep both icons compact inside the fixed bottom bar */
-    @media (max-width: 768px) {
-        padding-left: 4px;
-        padding-right: 4px;
-
-        :global(.button) {
-            min-height: 36px !important;
-            padding: 4px 6px !important;
-        }
     }
 }
 
@@ -146,11 +153,22 @@
     --neutral-on-background-medium: #ffffff;
 }
 
-/* Prevent the nav-wide hover rule from turning the scroll-to-top arrow white */
+/* Prevent the nav-wide hover rule from turning the theme-toggle button white */
 :global([data-theme="light"]) .themeToggle :global(.button):hover {
     color: #000000 !important;
 }
 
 :global([data-theme="dark"]) .themeToggle :global(.button):hover {
+    color: #ffffff !important;
+}
+
+/* Go-to-top button: pin color regardless of hover */
+:global([data-theme="light"]) .arrowUpBtn :global(.button),
+:global([data-theme="light"]) .arrowUpBtn :global(.button):hover {
+    color: #000000 !important;
+}
+
+:global([data-theme="dark"]) .arrowUpBtn :global(.button),
+:global([data-theme="dark"]) .arrowUpBtn :global(.button):hover {
     color: #ffffff !important;
 }
