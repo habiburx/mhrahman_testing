@@ -58,13 +58,27 @@
 
 /* Tablet (769 – 1024 px): wider cards and content */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .page-card         { width: 95%; }
-  .content-width     { width: 95%; }
-  .footer-inner      { width: 95%; }
-  .blog-post-layout  { width: 95%; }
-  .blog-post-body    { gap: 32px; }
-  .nav-pill-width    { width: 95%; }
-  .header-offset     { height: 320px; }
+  .page-card {
+    width: 95%;
+  }
+  .content-width {
+    width: 95%;
+  }
+  .footer-inner {
+    width: 95%;
+  }
+  .blog-post-layout {
+    width: 95%;
+  }
+  .blog-post-body {
+    gap: 32px;
+  }
+  .nav-pill-width {
+    width: 95%;
+  }
+  .header-offset {
+    height: 320px;
+  }
 }
 
 /* ── SECTION 4: SOCIAL BUTTONS ───────────────────────────────────
@@ -233,7 +247,7 @@ body {
   display: grid !important;
   grid-template-columns: 1fr 1fr;
 }
-.two-col-items > :nth-child(-n+2) .card-item-inner {
+.two-col-items > :nth-child(-n + 2) .card-item-inner {
   padding-top: 16px;
 }
 @media (max-width: 768px) {
@@ -289,12 +303,13 @@ body {
 .footer-bar {
   border-top: 4px solid transparent;
   border-image: linear-gradient(
-    to right,
-    transparent,
-    var(--portfolio-border) 20%,
-    var(--portfolio-border) 80%,
-    transparent
-  ) 1;
+      to right,
+      transparent,
+      var(--portfolio-border) 20%,
+      var(--portfolio-border) 80%,
+      transparent
+    )
+    1;
   background-color: var(--portfolio-card-bg);
   overflow: visible;
 }

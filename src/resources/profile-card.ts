@@ -1,16 +1,5 @@
 import type { Person, Social } from "@/types";
 
-/**
- * PROFILE CARD CUSTOMIZATION
- *
- * Edit this file to change the photo card:
- * - name, role, email, location
- * - profile image
- * - image fit/position
- * - department / university detail lines
- * - Google Scholar profile
- * - social buttons
- */
 const person: Person = {
   firstName: "Md Habibur",
   lastName: "Rahman",
@@ -26,14 +15,11 @@ const person: Person = {
   personalEmail: "mhrahman.cs@gmail.com",
   address: "Norfolk, VA, United States of America",
   nickname: "Habib",
-  cv: "#", // ← replace "#" with your CV link when ready
-  // location: "America/New_York", // IANA time zone identifier — uncomment to show local time
-  languages: [], // e.g. ["English", "Bengali"] — leave empty to hide
+  cv: "#",
+  languages: [],
 };
 
 const social: Social = [
-  // Set essential: true to show a link on the profile card.
-  // Add new icons in src/resources/icons.ts
   {
     name: "github/habiburx",
     icon: "github",

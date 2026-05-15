@@ -90,9 +90,8 @@ const aboutPageContent = {
   bio: (
     <>
       Welcome to my homepage! I&apos;m Md Habibur Rahman, a first year PhD student in Computer
-      Science at{" "}
-      <SmartLink href="https://www.odu.edu/">Old Dominion University</SmartLink>. I have completed
-      my Master of Science in Computer Science from{" "}
+      Science at <SmartLink href="https://www.odu.edu/">Old Dominion University</SmartLink>. I have
+      completed my Master of Science in Computer Science from{" "}
       <SmartLink href="https://juniv.edu/department/cse">Jahangirnagar University</SmartLink> and
       pursued a Bachelor of Science in Computer Science and Engineering from{" "}
       <SmartLink href="https://daffodilvarsity.edu.bd/">

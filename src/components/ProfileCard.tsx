@@ -31,9 +31,7 @@ export function ProfileCard() {
         <Row vertical="center" gap="8" wrap>
           <Text className={styles.name}>
             {person.name}
-            {person.nickname && (
-              <span className={styles.nickname}> ({person.nickname})</span>
-            )}
+            {person.nickname && <span className={styles.nickname}> ({person.nickname})</span>}
           </Text>
           {person.cv && (
             <IconButton

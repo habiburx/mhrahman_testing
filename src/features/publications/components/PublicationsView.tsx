@@ -136,14 +136,13 @@ export function PublicationsView() {
                         {pub.keywords && pub.keywords.length > 0 && (
                           <Row gap="8" wrap className="pub-keywords">
                             {pub.keywords.map((kw) => (
-                              <span key={kw} className="pub-keyword-tag">{kw}</span>
+                              <span key={kw} className="pub-keyword-tag">
+                                {kw}
+                              </span>
                             ))}
                           </Row>
                         )}
-                        <Text
-                          variant="body-default-s"
-                          className="pub-authors"
-                        >
+                        <Text variant="body-default-s" className="pub-authors">
                           {renderAuthors(pub.authors)}
                         </Text>
                         <Row gap="8" vertical="center" wrap>

@@ -198,11 +198,7 @@ export const Header = () => {
                   >
                     <ThemeToggle />
                   </Row>
-                  <Row
-                    paddingX="8"
-                    vertical="center"
-                    className={styles.mobileThemeRow}
-                  >
+                  <Row paddingX="8" vertical="center" className={styles.mobileThemeRow}>
                     <ThemeToggle />
                     <Line background="neutral-alpha-medium" vert />
                     <span className={styles.arrowUpBtn}>

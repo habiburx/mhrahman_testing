@@ -83,7 +83,6 @@ const experiencesPageContent: ExperiencesPageContent = {
           </>
         ),
       },
-      // Add more entries by copying the block above
     ],
   },
   research: {
@@ -105,20 +104,38 @@ const experiencesPageContent: ExperiencesPageContent = {
         achievement:
           "Deep learning approach to tomato leaf disease detection using EfficientNetB3.",
       },
-      // Add more entries by copying the block above
     ],
   },
   services: {
     display: true,
     title: "Services",
     items: [
-      { role: "Graduate Teaching Assistant", organization: "Old Dominion University", link: "https://www.odu.edu/" },
-      { role: "Graduate Research Assistant", organization: "Old Dominion University", link: "https://www.odu.edu/" },
-      { role: "Lecturer", organization: "Institute of Science & Technology", link: "https://ist.edu.bd/" },
+      {
+        role: "Graduate Teaching Assistant",
+        organization: "Old Dominion University",
+        link: "https://www.odu.edu/",
+      },
+      {
+        role: "Graduate Research Assistant",
+        organization: "Old Dominion University",
+        link: "https://www.odu.edu/",
+      },
+      {
+        role: "Lecturer",
+        organization: "Institute of Science & Technology",
+        link: "https://ist.edu.bd/",
+      },
       { role: "Website Developer", organization: "Supabex", link: "https://supabex.com/" },
-      { role: "Instructor & Content Creator", organization: "IshQool", link: "https://www.facebook.com/ishqool.org/" },
-      { role: "Teaching Assistant", organization: "Daffodil International University", link: "https://daffodilvarsity.edu.bd/" },
-      // Add more entries by copying the block above
+      {
+        role: "Instructor & Content Creator",
+        organization: "IshQool",
+        link: "https://www.facebook.com/ishqool.org/",
+      },
+      {
+        role: "Teaching Assistant",
+        organization: "Daffodil International University",
+        link: "https://daffodilvarsity.edu.bd/",
+      },
     ],
   },
   teaching: {

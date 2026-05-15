@@ -21,8 +21,8 @@ export const Footer = () => {
             <Text as="span" onBackground="neutral-strong">
               {person.name}
             </Text>
-          </SmartLink>
-          {" "}{new Date().getFullYear()}
+          </SmartLink>{" "}
+          {new Date().getFullYear()}
         </Text>
 
         {/* Social icon links + CV */}

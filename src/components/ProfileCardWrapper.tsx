@@ -10,7 +10,14 @@ export function ProfileCardWrapper() {
   const pathname = usePathname();
   if (HIDE_PATTERNS.some((p) => p.test(pathname))) return null;
   return (
-    <Flex id="profile-card-anchor" fillWidth paddingTop="s" paddingBottom="4" horizontal="center" className="profile-card-wrapper">
+    <Flex
+      id="profile-card-anchor"
+      fillWidth
+      paddingTop="s"
+      paddingBottom="4"
+      horizontal="center"
+      className="profile-card-wrapper"
+    >
       <ProfileCard />
     </Flex>
   );

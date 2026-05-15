@@ -22,7 +22,6 @@ const home: Home = {
     "Portfolio of Md Habibur Rahman, PhD student in Computer Science at Old Dominion University and AI security researcher.",
   headline: <>Researching security, privacy, and trustworthy AI</>,
   featured: {
-    // Set display: true and update href to highlight a specific project on the home page
     display: false,
     title: <>Featured work</>,
     href: "/publications/machine-learning-firewall-log-classification",
@@ -40,7 +39,6 @@ const gallery: Gallery = {
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `A photo collection by ${person.name}`,
-  // Replace these with your own images in public/images/gallery/
   images: [
     {
       src: "/images/gallery/horizontal-1.jpg",

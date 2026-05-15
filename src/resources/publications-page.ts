@@ -37,7 +37,13 @@ const publications: Publication[] = [
     venue:
       "International Conference on Computational Intelligence and Sustainable Engineering Solutions (CISES), pp. 358-364",
     type: "Conference",
-    keywords: ["Machine Learning", "Network Security", "Classification", "Firewall", "Cybersecurity"],
+    keywords: [
+      "Machine Learning",
+      "Network Security",
+      "Classification",
+      "Firewall",
+      "Cybersecurity",
+    ],
     links: [
       { label: "IEEE", href: "https://ieeexplore.ieee.org/document/10183601" },
       { label: "DOI", href: "https://doi.org/10.1109/CISES58720.2023.10183601" },
@@ -52,7 +58,13 @@ const publications: Publication[] = [
     authors: ["Md Habibur Rahman"],
     venue: "CISES 2023",
     type: "Talk",
-    keywords: ["Machine Learning", "Network Security", "Classification", "Firewall", "Cybersecurity"],
+    keywords: [
+      "Machine Learning",
+      "Network Security",
+      "Classification",
+      "Firewall",
+      "Cybersecurity",
+    ],
   },
 ];
 
