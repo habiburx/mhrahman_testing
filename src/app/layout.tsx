@@ -191,7 +191,7 @@ export default async function RootLayout({
           <Header />
 
           {/* Page content */}
-          <Flex zIndex={0} fillWidth paddingTop="4" paddingBottom="s" horizontal="center" flex={1}>
+          <Flex zIndex={0} fillWidth paddingTop="0" paddingBottom="s" horizontal="center" flex={1}>
             <Flex horizontal="center" fillWidth minHeight="0">
               <RouteGuard>{children}</RouteGuard>
             </Flex>

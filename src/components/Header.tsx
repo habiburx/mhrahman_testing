@@ -55,6 +55,7 @@ const NavTab = ({ href, icon, label, active }: NavTabProps) => (
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const isMdxView = /^\/blogs\/.+/.test(pathname) || /^\/publications\/.+/.test(pathname);
   const [stuck, setStuck] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(52);
@@ -95,7 +96,12 @@ export const Header = () => {
       {/* Placeholder that keeps the layout space when the navbar lifts out of flow */}
       {stuck && <div style={{ height }} aria-hidden="true" />}
 
-      <div ref={wrapperRef} className={`${styles.position} ${stuck ? styles.stuck : ""}`}>
+      <div
+        ref={wrapperRef}
+        className={`${styles.position} ${stuck ? styles.stuck : ""} ${
+          isMdxView ? styles.flush : ""
+        }`}
+      >
         <Row fitHeight as="header" fillWidth horizontal="center" className="nav-header-inner">
           <Row
             background="page"

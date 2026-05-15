@@ -36,3 +36,25 @@ export function formatDate(date: string, includeRelative = false) {
 
   return `${fullDate} (${formattedDate})`;
 }
+
+export function formatShortDate(date: string) {
+  const normalizedDate = date.includes("T") ? date : `${date}T00:00:00`;
+  const targetDate = new Date(normalizedDate);
+
+  return targetDate.toLocaleString("en-us", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+export function formatDateParts(date: string) {
+  const normalizedDate = date.includes("T") ? date : `${date}T00:00:00`;
+  const targetDate = new Date(normalizedDate);
+
+  return {
+    month: targetDate.toLocaleString("en-us", { month: "short" }),
+    day: targetDate.toLocaleString("en-us", { day: "2-digit" }),
+    year: targetDate.toLocaleString("en-us", { year: "numeric" }),
+  };
+}

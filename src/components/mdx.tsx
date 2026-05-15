@@ -96,8 +96,8 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
     const slug = slugify(children as string);
     return (
       <HeadingLink
-        marginTop="24"
-        marginBottom="12"
+        marginTop={as === "h2" ? "32" : "20"}
+        marginBottom="8"
         as={as}
         id={slug}
         className={`mdx-heading mdx-heading-${as}`}
@@ -119,8 +119,8 @@ function createParagraph({ children }: TextProps) {
       className="mdx-text"
       variant="body-default-m"
       onBackground="neutral-medium"
-      marginTop="8"
-      marginBottom="12"
+      marginTop="0"
+      marginBottom="16"
     >
       {children}
     </Text>
@@ -137,12 +137,10 @@ type CodeElementProps = {
 };
 
 function createCodeBlock({ children, ...props }: React.ComponentProps<"pre">) {
-  // For pre tags that contain code blocks
   if (isValidElement<CodeElementProps>(children) && children.props.className) {
     const { className, children: rawCode } = children.props;
     const code = typeof rawCode === "string" ? rawCode : String(rawCode ?? "");
 
-    // Extract language from className (format: language-xxx)
     const language = className.replace("language-", "");
     const label = language.charAt(0).toUpperCase() + language.slice(1);
 
@@ -162,13 +160,12 @@ function createCodeBlock({ children, ...props }: React.ComponentProps<"pre">) {
     );
   }
 
-  // Fallback for other pre tags or empty code blocks
   return <pre {...props}>{children}</pre>;
 }
 
 function createList(as: "ul" | "ol") {
   return ({ children }: { children: ReactNode }) => (
-    <List as={as} className="mdx-list">
+    <List as={as} className={`mdx-list mdx-list-${as}`}>
       {children}
     </List>
   );
@@ -182,11 +179,25 @@ function createListItem({ children }: { children: ReactNode }) {
   );
 }
 
+function createBlockquote({ children }: { children: ReactNode }) {
+  return <blockquote className="mdx-blockquote">{children}</blockquote>;
+}
+
 function createHR() {
   return (
     <Row fillWidth horizontal="center">
       <Line maxWidth="40" className="mdx-divider" />
     </Row>
+  );
+}
+
+function createTable({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) {
+  return (
+    <div className="mdx-table-wrap">
+      <table className="mdx-table" {...props}>
+        {children}
+      </table>
+    </div>
   );
 }
 
@@ -207,6 +218,8 @@ const components: MDXComponents = {
   ol: createList("ol"),
   ul: createList("ul"),
   li: createListItem,
+  blockquote: createBlockquote,
+  table: createTable,
   hr: createHR,
   Heading,
   Text,

@@ -15,7 +15,6 @@ const person: Person = {
   personalEmail: "mhrahman.cs@gmail.com",
   address: "Norfolk, VA, United States of America",
   nickname: "Habib",
-  cv: "#",
   languages: [],
 };
 

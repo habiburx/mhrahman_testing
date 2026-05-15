@@ -1,5 +1,6 @@
 import { baseURL, blogs, person, sameAs } from "@/resources";
 import { blogsPageContent } from "@/resources/blogs-page";
+import { formatShortDate } from "@/utils/formatDate";
 import { getPosts } from "@/utils/utils";
 import { Column, Heading, Line, Meta, Row, Schema, SmartLink, Text } from "@once-ui-system/core";
 
@@ -13,10 +14,11 @@ export async function generateMetadata() {
 }
 
 export default function BlogsPage() {
-  const posts = getPosts(blogsPageContent.postsDirectory).sort(
-    (a, b) =>
-      new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime(),
-  );
+  const posts = [...getPosts(blogsPageContent.postsDirectory)].sort((a, b) => {
+    const newer = new Date(b.metadata.publishedAt).getTime();
+    const older = new Date(a.metadata.publishedAt).getTime();
+    return newer - older;
+  });
 
   return (
     <Column fillWidth horizontal="center">
@@ -61,21 +63,8 @@ export default function BlogsPage() {
           ) : (
             posts.map((post) => (
               <Column key={post.slug} fillWidth>
-                <SmartLink
-                  href={`/blogs/${post.slug}`}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    display: "block",
-                    width: "100%",
-                  }}
-                >
-                  <Row
-                    fillWidth
-                    vertical="center"
-                    className="blog-list-row"
-                    style={{ justifyContent: "space-between" }}
-                  >
+                <SmartLink href={`/blogs/${post.slug}`} className="blog-list-link">
+                  <Row fillWidth vertical="center" className="blog-list-row">
                     <Row gap="8" vertical="center" flex={1} className="blog-list-content">
                       <Text
                         variant="body-default-m"
@@ -89,9 +78,9 @@ export default function BlogsPage() {
                         onBackground="neutral-weak"
                         className="blog-list-date"
                       >
-                        {post.metadata.publishedAt}
+                        {formatShortDate(post.metadata.publishedAt)}
                       </Text>
-                      <Text variant="body-strong-m" className="blog-list-title">
+                      <Text variant="body-default-m" className="blog-list-title">
                         {post.metadata.title}
                       </Text>
                     </Row>

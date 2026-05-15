@@ -13,8 +13,8 @@ export function ProfileCardWrapper() {
     <Flex
       id="profile-card-anchor"
       fillWidth
-      paddingTop="s"
-      paddingBottom="4"
+      paddingTop="0"
+      paddingBottom="0"
       horizontal="center"
       className="profile-card-wrapper"
     >

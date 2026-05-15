@@ -41,7 +41,14 @@ export function BlogTOC({ headings }: BlogTOCProps) {
         {headings.map(({ level, text, id }) => (
           <a key={id} href={`#${id}`} className={styles.link} data-active={activeId === id}>
             <div className={styles.item} style={{ paddingLeft: level === 3 ? 8 : 0 }}>
-              <span className={styles.dot} data-active={activeId === id} data-sub={level === 3} />
+              <span
+                className={styles.arrow}
+                data-active={activeId === id}
+                data-sub={level === 3}
+                aria-hidden="true"
+              >
+                ›
+              </span>
               <span className={styles.text} data-active={activeId === id}>
                 {text}
               </span>

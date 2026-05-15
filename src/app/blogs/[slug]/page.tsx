@@ -2,7 +2,7 @@ import { CustomMDX, ScrollToHash } from "@/components";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { baseURL, blogs, person, sameAs } from "@/resources";
 import { extractHeadings } from "@/utils/extractHeadings";
-import { formatDate } from "@/utils/formatDate";
+import { formatDateParts } from "@/utils/formatDate";
 import { getPosts } from "@/utils/utils";
 import {
   Column,
@@ -19,6 +19,18 @@ import {
 } from "@once-ui-system/core";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+function estimateReadingTime(content: string) {
+  const words = content
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/[#*_`>\-[\]()]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return Math.max(1, Math.ceil(words.length / 220));
+}
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "content", "blogs"]);
@@ -50,9 +62,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
 
   const headings = extractHeadings(post.content);
+  const readingTime = estimateReadingTime(post.content);
+  const dateParts = post.metadata.publishedAt ? formatDateParts(post.metadata.publishedAt) : null;
 
   return (
-    <Column fillWidth horizontal="center" paddingTop="32" paddingBottom="xl">
+    <Column fillWidth horizontal="center" paddingTop="0" paddingBottom="xl">
       <Schema
         as="blogPosting"
         baseURL={baseURL}
@@ -72,13 +86,34 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         }}
       />
 
-      <div className="blog-post-layout">
-        {/* Post header — full width, centered */}
-        <Column gap="12" horizontal="center" marginBottom="40">
-          <Text variant="label-default-xs" onBackground="neutral-weak">
-            {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-          </Text>
-          <Heading variant="display-strong-l" align="center">
+      <Column
+        border="neutral-alpha-weak"
+        radius="l"
+        shadow="l"
+        overflow="hidden"
+        fillWidth
+        className="blog-post-layout page-card"
+      >
+        <Column gap="16" horizontal="center" marginBottom="40" className="blog-post-header">
+          <Row gap="8" wrap horizontal="center" vertical="center" className="blog-post-meta-row">
+            {post.metadata.tag && (
+              <Tag label={post.metadata.tag} variant="neutral" size="s" className="blog-post-tag" />
+            )}
+            {dateParts && (
+              <span
+                className="blog-post-date-chip"
+                aria-label={`${dateParts.month} ${dateParts.day}, ${dateParts.year}`}
+              >
+                <span className="blog-post-date-month">{dateParts.month}</span>
+                <span className="blog-post-date-day">{dateParts.day}</span>
+                <span className="blog-post-date-year">{dateParts.year}</span>
+              </span>
+            )}
+            <Text variant="label-default-xs" onBackground="neutral-weak" className="blog-post-meta">
+              {readingTime} min read
+            </Text>
+          </Row>
+          <Heading variant="display-strong-m" align="center" className="blog-post-title">
             {post.metadata.title}
           </Heading>
           {post.metadata.subtitle && (
@@ -86,15 +121,15 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               variant="body-default-l"
               onBackground="neutral-weak"
               align="center"
-              style={{ fontStyle: "italic" }}
+              className="blog-post-subtitle"
             >
               {post.metadata.subtitle}
             </Text>
           )}
-          {post.metadata.tag && <Tag label={post.metadata.tag} variant="neutral" size="s" />}
         </Column>
 
-        {/* Hero image — full width */}
+        <Line background="neutral-alpha-weak" />
+
         {post.metadata.image && (
           <Media
             src={post.metadata.image}
@@ -105,14 +140,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             border="neutral-alpha-weak"
             radius="l"
             marginBottom="40"
+            className="blog-post-hero"
           />
         )}
 
-        {/* 70 / 30 body */}
         <div className="blog-post-body">
-          {/* Article — 70% */}
           <div className="blog-post-article">
-            <Column as="article" fillWidth>
+            <Column as="article" fillWidth className="mdx-content">
               <CustomMDX source={post.content} />
             </Column>
             <Column marginTop="48">
@@ -120,17 +154,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             </Column>
           </div>
 
-          {/* TOC sidebar — 30% */}
           <div className="blog-post-toc">
-            <SmartLink href="/blogs" style={{ textDecoration: "none" }}>
+            <SmartLink href="/blogs" className="blog-post-back-link">
               <Row
                 gap="8"
                 vertical="center"
                 paddingX="12"
                 paddingY="8"
                 radius="m"
-                border="neutral-alpha-weak"
-                background="neutral-alpha-weak"
                 marginBottom="16"
               >
                 <Icon name="chevronLeft" size="xs" onBackground="neutral-medium" />
@@ -142,7 +173,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {headings.length >= 2 && <BlogTOC headings={headings} />}
           </div>
         </div>
-      </div>
+      </Column>
 
       <ScrollToHash />
     </Column>

@@ -167,9 +167,9 @@ const experiencesPageContent: ExperiencesPageContent = {
     ],
   },
   studentMentored: {
-    display: true,
+    display: false,
     title: "Student Mentored",
-    items: ["Loading"],
+    items: [],
   },
 };
 
