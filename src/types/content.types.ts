@@ -1,5 +1,5 @@
-import { IconName } from "@/resources/icons";
-import { zones } from "tzdata";
+import type { IconName } from "@/resources/icons";
+import type { zones } from "tzdata";
 
 /**
  * IANA time zone string (e.g., 'Asia/Calcutta', 'Europe/Vienna').
@@ -21,8 +21,20 @@ export type Person = {
   role: string;
   /** Path to avatar image */
   avatar: string;
+  /** Descriptive text for the avatar image */
+  avatarAlt?: string;
+  /** How the profile photo should fit the frame */
+  avatarFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
+  /** Photo position inside the frame, e.g. "center", "top center" */
+  avatarPosition?: string;
+  /** Extra lines shown under the role on the profile card */
+  details?: string[];
+  /** Google Scholar profile URL for citation metrics */
+  scholar?: string;
   /** Email address */
   email: string;
+  /** Personal email address */
+  personalEmail?: string;
   /** Mailing address */
   address?: string;
   /** IANA time zone location */

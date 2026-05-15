@@ -1,6 +1,7 @@
-import { Button, Column, Row, Text } from "@once-ui-system/core";
 import { person, social } from "@/resources";
+import { Button, Column, Row, Text } from "@once-ui-system/core";
 import styles from "./ProfileCard.module.scss";
+import { ScholarStats } from "./ScholarStats";
 
 export function ProfileCard() {
   return (
@@ -14,46 +15,55 @@ export function ProfileCard() {
     >
       {/* Profile photo */}
       <Column className={styles.avatar}>
-        <img src={person.avatar} alt={person.name} className={styles.avatarImg} />
+        <img
+          src={person.avatar}
+          alt={person.avatarAlt ?? `${person.name} profile photo`}
+          className={styles.avatarImg}
+          style={{
+            objectFit: person.avatarFit ?? "contain",
+            objectPosition: person.avatarPosition ?? "center",
+          }}
+        />
       </Column>
 
       {/* Name, role, contact info, social buttons */}
       <Column gap="8" fillWidth vertical="center" className={styles.info}>
         <Text className={styles.name}>{person.name}</Text>
-        <Text className="profile-text" onBackground="neutral-weak">{person.role}</Text>
-        <Text className="profile-text" onBackground="brand-medium">Department of Computer Science</Text>
-        <Text className="profile-text" onBackground="brand-medium">Old Dominion University, USA</Text>
-        {person.address && (
-          <Text className="profile-text">{person.address}</Text>
-        )}
-        {person.email && (
-          <Text className="profile-text">Email: {person.email}</Text>
+        <Text className="profile-text" onBackground="neutral-weak">
+          {person.role}
+        </Text>
+        {person.details?.map((detail) => (
+          <Text key={detail} className="profile-text" onBackground="brand-medium">
+            {detail}
+          </Text>
+        ))}
+        {person.address && <Text className="profile-text">{person.address}</Text>}
+        {person.email && <Text className="profile-text">Academic: {person.email}</Text>}
+        {person.personalEmail && (
+          <Text className="profile-text">Personal: {person.personalEmail}</Text>
         )}
         {social.filter((item) => item.essential).length > 0 && (
           <Row gap="8" wrap paddingTop="4" className={`social-buttons ${styles.socialRow}`}>
-            {social.filter((item) => item.essential).map((item) =>
-              item.link ? (
-                <Button
-                  key={item.name}
-                  href={item.link}
-                  prefixIcon={item.icon}
-                  label={item.name}
-                  size="s"
-                  variant="tertiary"
-                />
-              ) : null,
-            )}
+            {social
+              .filter((item) => item.essential)
+              .map((item) =>
+                item.link ? (
+                  <Button
+                    key={`${item.icon}-${item.link}`}
+                    href={item.link}
+                    prefixIcon={item.icon}
+                    label={item.name}
+                    size="s"
+                    variant="tertiary"
+                    className={styles.socialButton}
+                  />
+                ) : null,
+              )}
           </Row>
         )}
       </Column>
 
-      {/* Empty spacer column — keeps right side padding on desktop, hidden on mobile */}
-      <Column
-        vertical="center"
-        horizontal="center"
-        className="profile-card-spacer"
-        s={{ hide: true }}
-      />
+      {person.scholar && <ScholarStats profileUrl={person.scholar} />}
     </Row>
   );
 }

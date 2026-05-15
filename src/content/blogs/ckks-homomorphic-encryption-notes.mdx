@@ -1,0 +1,34 @@
+---
+title: "Notes on CKKS and Encrypted Machine Learning"
+subtitle: "From undergraduate research to privacy-preserving inference"
+summary: "A brief overview of CKKS, fully homomorphic encryption, and why encrypted machine learning is useful for privacy."
+publishedAt: "2025-06-10"
+tag: "Cryptography"
+---
+
+## Motivation
+
+Fully homomorphic encryption allows computation on encrypted data. In a machine
+learning setting, this means a model can process sensitive inputs without first
+decrypting them.
+
+My undergraduate research explored encrypted machine learning using the CKKS
+scheme, which is designed for approximate arithmetic over real numbers.
+
+## CKKS in One Sentence
+
+CKKS is useful when exact integer arithmetic is less important than efficient
+approximate computation, which makes it a natural fit for many numerical
+machine learning workloads.
+
+## Practical Challenges
+
+- Encrypted operations are slower than plaintext computation
+- Multiplicative depth must be managed carefully
+- Approximation error grows through computation
+- Model architecture often needs to be adapted for encrypted inference
+
+## Research Direction
+
+The interesting question is not only whether encrypted inference is possible,
+but how to make it practical enough for real privacy-sensitive applications.

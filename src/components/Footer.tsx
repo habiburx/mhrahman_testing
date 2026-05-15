@@ -1,10 +1,9 @@
-import { Row, IconButton, SmartLink, Text } from "@once-ui-system/core";
 import { person, social } from "@/resources";
+import { IconButton, Row, SmartLink, Text } from "@once-ui-system/core";
 
 export const Footer = () => {
   return (
     <Row as="footer" fillWidth paddingY="8" horizontal="center">
-
       {/* Footer bar — same 80 % width as the navbar */}
       <Row
         paddingY="12"
@@ -18,7 +17,9 @@ export const Footer = () => {
         <Text variant="body-default-s" onBackground="neutral-weak">
           ©{" "}
           <SmartLink href="/">
-            <Text as="span" onBackground="neutral-strong">{person.name}</Text>
+            <Text as="span" onBackground="neutral-strong">
+              {person.name}
+            </Text>
           </SmartLink>
         </Text>
 
@@ -41,7 +42,6 @@ export const Footer = () => {
 
       {/* Spacer: hidden on desktop, shown on mobile to clear the fixed bottom navbar */}
       <Row hide s={{ hide: false }} className="footer-mobile-spacer" />
-
     </Row>
   );
 };

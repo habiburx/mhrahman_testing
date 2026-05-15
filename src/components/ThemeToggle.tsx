@@ -1,24 +1,30 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useTheme } from "@once-ui-system/core";
-import { HiSun, HiMoon } from "react-icons/hi2";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { HiMoon, HiSun } from "react-icons/hi2";
 
 export const ThemeToggle: React.FC = () => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState("light");
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     setCurrentTheme(document.documentElement.getAttribute("data-theme") || "light");
-  }, [theme]);
+  }, []);
 
   const isDark = currentTheme === "dark";
+  const handleToggle = () => {
+    const nextTheme = isDark ? "light" : "dark";
+    setCurrentTheme(nextTheme);
+    setTheme(nextTheme);
+  };
 
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={handleToggle}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

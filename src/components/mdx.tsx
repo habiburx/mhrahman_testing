@@ -1,30 +1,31 @@
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import React, { ReactNode } from "react";
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
+import type React from "react";
+import { type ReactNode, isValidElement } from "react";
 import { slugify as transliterate } from "transliteration";
 
 import {
-  Heading,
-  HeadingLink,
-  Text,
-  InlineCode,
-  CodeBlock,
-  TextProps,
-  MediaProps,
   Accordion,
   AccordionGroup,
-  Table,
-  Feedback,
   Button,
   Card,
-  Grid,
-  Row,
+  CodeBlock,
   Column,
+  Feedback,
+  Grid,
+  Heading,
+  HeadingLink,
   Icon,
-  Media,
-  SmartLink,
+  InlineCode,
+  Line,
   List,
   ListItem,
-  Line,
+  Media,
+  type MediaProps,
+  Row,
+  SmartLink,
+  Table,
+  Text,
+  type TextProps,
 } from "@once-ui-system/core";
 
 type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -33,9 +34,11 @@ type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
 };
 
 function CustomLink({ href, children, ...props }: CustomLinkProps) {
+  const className = props.className ? `mdx-link ${props.className}` : "mdx-link";
+
   if (href.startsWith("/")) {
     return (
-      <SmartLink href={href} {...props}>
+      <SmartLink href={href} {...props} className={className}>
         {children}
       </SmartLink>
     );
@@ -43,14 +46,14 @@ function CustomLink({ href, children, ...props }: CustomLinkProps) {
 
   if (href.startsWith("#")) {
     return (
-      <a href={href} {...props}>
+      <a href={href} {...props} className={className}>
         {children}
       </a>
     );
   }
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+    <a href={href} target="_blank" rel="noopener noreferrer" {...props} className={className}>
       {children}
     </a>
   );
@@ -92,7 +95,14 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
   }: Omit<React.ComponentProps<typeof HeadingLink>, "as" | "id">) => {
     const slug = slugify(children as string);
     return (
-      <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+      <HeadingLink
+        marginTop="24"
+        marginBottom="12"
+        as={as}
+        id={slug}
+        className={`mdx-heading mdx-heading-${as}`}
+        {...props}
+      >
         {children}
       </HeadingLink>
     );
@@ -118,13 +128,19 @@ function createParagraph({ children }: TextProps) {
 }
 
 function createInlineCode({ children }: { children: ReactNode }) {
-  return <InlineCode>{children}</InlineCode>;
+  return <InlineCode className="mdx-inline-code">{children}</InlineCode>;
 }
 
-function createCodeBlock(props: any) {
+type CodeElementProps = {
+  className?: string;
+  children?: ReactNode;
+};
+
+function createCodeBlock({ children, ...props }: React.ComponentProps<"pre">) {
   // For pre tags that contain code blocks
-  if (props.children && props.children.props && props.children.props.className) {
-    const { className, children } = props.children.props;
+  if (isValidElement<CodeElementProps>(children) && children.props.className) {
+    const { className, children: rawCode } = children.props;
+    const code = typeof rawCode === "string" ? rawCode : String(rawCode ?? "");
 
     // Extract language from className (format: language-xxx)
     const language = className.replace("language-", "");
@@ -136,7 +152,7 @@ function createCodeBlock(props: any) {
         marginBottom="16"
         codes={[
           {
-            code: children,
+            code,
             language,
             label,
           },
@@ -147,11 +163,15 @@ function createCodeBlock(props: any) {
   }
 
   // Fallback for other pre tags or empty code blocks
-  return <pre {...props} />;
+  return <pre {...props}>{children}</pre>;
 }
 
 function createList(as: "ul" | "ol") {
-  return ({ children }: { children: ReactNode }) => <List as={as}>{children}</List>;
+  return ({ children }: { children: ReactNode }) => (
+    <List as={as} className="mdx-list">
+      {children}
+    </List>
+  );
 }
 
 function createListItem({ children }: { children: ReactNode }) {
@@ -165,27 +185,29 @@ function createListItem({ children }: { children: ReactNode }) {
 function createHR() {
   return (
     <Row fillWidth horizontal="center">
-      <Line maxWidth="40" />
+      <Line maxWidth="40" className="mdx-divider" />
     </Row>
   );
 }
 
-const components = {
-  p: createParagraph as any,
-  h1: createHeading("h1") as any,
-  h2: createHeading("h2") as any,
-  h3: createHeading("h3") as any,
-  h4: createHeading("h4") as any,
-  h5: createHeading("h5") as any,
-  h6: createHeading("h6") as any,
-  img: createImage as any,
-  a: CustomLink as any,
-  code: createInlineCode as any,
-  pre: createCodeBlock as any,
-  ol: createList("ol") as any,
-  ul: createList("ul") as any,
-  li: createListItem as any,
-  hr: createHR as any,
+type MDXComponents = NonNullable<MDXRemoteProps["components"]>;
+
+const components: MDXComponents = {
+  p: createParagraph,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+  h4: createHeading("h4"),
+  h5: createHeading("h5"),
+  h6: createHeading("h6"),
+  img: createImage,
+  a: CustomLink,
+  code: createInlineCode,
+  pre: createCodeBlock,
+  ol: createList("ol"),
+  ul: createList("ul"),
+  li: createListItem,
+  hr: createHR,
   Heading,
   Text,
   CodeBlock,
@@ -209,5 +231,11 @@ type CustomMDXProps = MDXRemoteProps & {
 };
 
 export function CustomMDX(props: CustomMDXProps) {
-  return <MDXRemote options={{ blockJS: false }} {...props} components={{ ...components, ...(props.components || {}) }} />;
+  return (
+    <MDXRemote
+      options={{ blockJS: false }}
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
+    />
+  );
 }

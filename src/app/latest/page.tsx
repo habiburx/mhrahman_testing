@@ -1,6 +1,7 @@
-import { Column, Heading, Line, Meta, Schema } from "@once-ui-system/core";
-import { baseURL, latest, person } from "@/resources";
 import { NewsTimeline } from "@/features/latest";
+import { baseURL, latest, person, sameAs } from "@/resources";
+import { latestPageContent } from "@/resources/latest-page";
+import { Column, Heading, Line, Meta, Schema } from "@once-ui-system/core";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -20,15 +21,25 @@ export default function LatestPage() {
         title={latest.title}
         description={latest.description}
         path={latest.path}
+        sameAs={Object.values(sameAs)}
         author={{
           name: person.name,
           url: `${baseURL}${latest.path}`,
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column border="neutral-alpha-weak" radius="l" shadow="l" overflow="hidden" fillWidth className="page-card">
+      <Column
+        border="neutral-alpha-weak"
+        radius="l"
+        shadow="l"
+        overflow="hidden"
+        fillWidth
+        className="page-card"
+      >
         <Column className="card-header">
-          <Heading as="h2" variant="heading-strong-l" className="research-heading">News</Heading>
+          <Heading as="h2" variant="heading-strong-l" className="research-heading">
+            {latestPageContent.heading}
+          </Heading>
         </Column>
         <Line background="neutral-alpha-weak" />
         <NewsTimeline />

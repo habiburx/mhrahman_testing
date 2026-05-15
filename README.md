@@ -31,20 +31,16 @@ Most content changes happen in a small set of files:
 ```text
 src/
   resources/
-    content.tsx              # Name, profile info, Home text, About data, education, services, gallery image list
+    profile-card.ts          # Name, profile photo, profile details, Scholar link, social buttons
+    about-page.tsx           # About page text, research interests, and metadata
+    latest-page.tsx          # Latest/news page labels and timeline items
+    publications-page.ts     # Publications page labels and publications list
+    experiences-page.tsx     # Experiences page labels, education, research, services
+    credentials-page.ts      # Credentials page labels, awards, certifications
+    blogs-page.ts            # Blogs page labels and listing text
+    content.tsx              # Home text, gallery image list, and resource exports
     once-ui.config.ts        # Domain/baseURL, enabled nav routes, theme, SEO defaults
     custom.css               # Brand colors, card width, shared page styling
-
-  app/
-    about/page.tsx           # About biography paragraph and research interest tags
-
-  features/
-    publications/data/
-      publications.data.ts   # Publications shown in the Publications nav item
-    latest/data/
-      news.data.tsx          # Timeline items shown in the Latest nav item
-    credentials/data/
-      credentials.data.ts    # Awards and certifications shown in the Credentials nav item
 
   content/
     blogs/*.mdx              # Long-form blog posts shown under Blogs
@@ -52,8 +48,7 @@ src/
 
 public/
   images/
-    avatar.jpg               # Profile photo
-    og/home.jpg              # Social share image
+    mhrahman.webp            # Profile photo
     gallery/*                # Gallery images referenced from content.tsx
 ```
 
@@ -63,7 +58,9 @@ You usually do not need to edit `src/components`, `src/types`, API routes, or bu
 
 ### Home
 
-Edit `src/resources/content.tsx`.
+Edit `src/resources/content.tsx` for home page copy.
+
+Edit `src/resources/profile-card.ts` for identity and social profile data.
 
 Update:
 
@@ -75,30 +72,35 @@ Update:
 
 ### About
 
-Edit `src/app/about/page.tsx` for the visible biography paragraph and research interest tags.
+Edit `src/resources/about-page.tsx`.
 
-Also edit `src/resources/content.tsx` if you want to update the About page metadata:
+Update:
 
 - `about.title`
 - `about.description`
 - `about.label`
+- `aboutPageContent.bio`
+- `aboutPageContent.researchInterests`
 
 ### Experiences
 
-Edit `src/resources/content.tsx`.
+Edit `src/resources/experiences-page.tsx`.
 
 Update:
 
-- `about.studies.institutions`: education entries
-- `about.work.experiences`: research or work experience entries
-- `about.services.items`: service, teaching, or professional activity entries
+- `work`: page label, title, and SEO description
+- `experiencesPageContent.studies.institutions`: education entries
+- `experiencesPageContent.research.experiences`: research or work experience entries
+- `experiencesPageContent.services.items`: service, teaching, or professional activity entries
 
 ### Publications
 
-Edit `src/features/publications/data/publications.data.ts`.
+Edit `src/resources/publications-page.ts`.
 
 Update:
 
+- `blog`: page label, title, and SEO description
+- `publicationsPageContent`: heading, empty message, and search placeholder
 - `myName`: your name exactly as it appears in author lists
 - `publications`: year, title, authors, venue, type, and links
 
@@ -106,20 +108,24 @@ For MDX-style publication pages, add or edit files in `src/content/publications/
 
 ### Latest
 
-Edit `src/features/latest/data/news.data.tsx`.
+Edit `src/resources/latest-page.tsx`.
 
-Update `newsItems` with date, category, and content. Supported categories are documented at the top of that file.
+Update `latest`, `latestPageContent`, and `newsItems`. Supported categories are documented in that file.
 
 ### Credentials
 
-Edit `src/features/credentials/data/credentials.data.ts`.
+Edit `src/resources/credentials-page.ts`.
 
 Update:
 
+- `credentials`: page label, title, and SEO description
+- `credentialsPageContent`: section titles and empty messages
 - `awards`
 - `certifications`
 
 ### Blogs
+
+Edit `src/resources/blogs-page.ts` for the Blogs page label, heading, and empty-state text.
 
 Add or edit MDX files in `src/content/blogs/`.
 
@@ -171,8 +177,7 @@ These control the main brand color, button hover color, text on brand background
 
 Replace these files when personalizing:
 
-- `public/images/avatar.jpg`
-- `public/images/og/home.jpg`
+- `public/images/mhrahman.webp`
 - files inside `public/images/gallery/`
 
 If you change filenames, update the matching paths in `src/resources/content.tsx`.

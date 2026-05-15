@@ -64,20 +64,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             )}
             <Flex gap="24" wrap>
               {content?.trim() && (
-                <SmartLink
-                  suffixIcon="arrowRight"
-                  className="project-link"
-                  href={href}
-                >
+                <SmartLink suffixIcon="arrowRight" className="project-link" href={href}>
                   <Text variant="body-default-s">Read case study</Text>
                 </SmartLink>
               )}
               {link && (
-                <SmartLink
-                  suffixIcon="arrowUpRightFromSquare"
-                  className="project-link"
-                  href={link}
-                >
+                <SmartLink suffixIcon="arrowUpRightFromSquare" className="project-link" href={link}>
                   <Text variant="body-default-s">View project</Text>
                 </SmartLink>
               )}

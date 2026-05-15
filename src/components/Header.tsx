@@ -1,11 +1,21 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import {
+  about,
+  blog,
+  blogs,
+  credentials,
+  display,
+  gallery,
+  latest,
+  routes,
+  work,
+} from "@/resources";
 import { IconButton, Line, Row, ToggleButton } from "@once-ui-system/core";
-import { routes, display, about, blog, blogs, work, latest, credentials, gallery } from "@/resources";
-import { ThemeToggle } from "./ThemeToggle";
+import { usePathname } from "next/navigation";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
+import { ThemeToggle } from "./ThemeToggle";
 
 /* Each nav tab renders two versions:
    - Desktop: icon + label (hidden on mobile)
@@ -60,9 +70,15 @@ export const Header = () => {
   // prevents the navbar from briefly appearing unfixed on pages without a ProfileCard.
   useLayoutEffect(() => {
     const check = () => {
-      if (window.innerWidth <= 768) { setStuck(false); return; }
+      if (window.innerWidth <= 768) {
+        setStuck(false);
+        return;
+      }
       const anchor = document.getElementById("profile-card-anchor");
-      if (!anchor) { setStuck(true); return; }
+      if (!anchor) {
+        setStuck(true);
+        return;
+      }
       setStuck(anchor.getBoundingClientRect().bottom <= 0);
     };
     window.addEventListener("scroll", check, { passive: true });
@@ -79,17 +95,8 @@ export const Header = () => {
       {/* Placeholder that keeps the layout space when the navbar lifts out of flow */}
       {stuck && <div style={{ height }} aria-hidden="true" />}
 
-      <div
-        ref={wrapperRef}
-        className={`${styles.position} ${stuck ? styles.stuck : ""}`}
-      >
-        <Row
-          fitHeight
-          as="header"
-          fillWidth
-          horizontal="center"
-          className="nav-header-inner"
-        >
+      <div ref={wrapperRef} className={`${styles.position} ${stuck ? styles.stuck : ""}`}>
+        <Row fitHeight as="header" fillWidth horizontal="center" className="nav-header-inner">
           <Row
             background="page"
             border="neutral-alpha-weak"
@@ -112,52 +119,93 @@ export const Header = () => {
               {routes["/latest"] && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <NavTab href="/latest" icon="newspaper" label={latest.label} active={pathname.startsWith("/latest")} />
+                  <NavTab
+                    href="/latest"
+                    icon="newspaper"
+                    label={latest.label}
+                    active={pathname.startsWith("/latest")}
+                  />
                 </>
               )}
 
               {routes["/publications"] && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <NavTab href="/publications" icon="book" label={blog.label} active={pathname.startsWith("/publications")} />
+                  <NavTab
+                    href="/publications"
+                    icon="book"
+                    label={blog.label}
+                    active={pathname.startsWith("/publications")}
+                  />
                 </>
               )}
 
               {routes["/experiences"] && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <NavTab href="/experiences" icon="grid" label={work.label} active={pathname.startsWith("/experiences")} />
+                  <NavTab
+                    href="/experiences"
+                    icon="grid"
+                    label={work.label}
+                    active={pathname.startsWith("/experiences")}
+                  />
                 </>
               )}
 
               {routes["/credentials"] && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <NavTab href="/credentials" icon="award" label={credentials.label} active={pathname.startsWith("/credentials")} />
+                  <NavTab
+                    href="/credentials"
+                    icon="award"
+                    label={credentials.label}
+                    active={pathname.startsWith("/credentials")}
+                  />
                 </>
               )}
 
               {routes["/blogs"] && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <NavTab href="/blogs" icon="pencil" label={blogs.label} active={pathname.startsWith("/blogs")} />
+                  <NavTab
+                    href="/blogs"
+                    icon="pencil"
+                    label={blogs.label}
+                    active={pathname.startsWith("/blogs")}
+                  />
                 </>
               )}
 
               {routes["/gallery"] && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <NavTab href="/gallery" icon="gallery" label={gallery.label} active={pathname.startsWith("/gallery")} />
+                  <NavTab
+                    href="/gallery"
+                    icon="gallery"
+                    label={gallery.label}
+                    active={pathname.startsWith("/gallery")}
+                  />
                 </>
               )}
 
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert />
-                  <Row s={{ hide: true }} paddingX="8" vertical="center" className={styles.themeToggle}>
+                  <Row
+                    s={{ hide: true }}
+                    paddingX="8"
+                    vertical="center"
+                    className={styles.themeToggle}
+                  >
                     <ThemeToggle />
                   </Row>
-                  <Row hide s={{ hide: false }} paddingX="8" vertical="center" className={styles.themeToggle}>
+                  <Row
+                    hide
+                    s={{ hide: false }}
+                    paddingX="8"
+                    vertical="center"
+                    className={styles.themeToggle}
+                  >
                     <IconButton
                       icon="arrowUp"
                       variant="ghost"

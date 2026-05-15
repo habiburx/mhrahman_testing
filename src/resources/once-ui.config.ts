@@ -1,4 +1,4 @@
-import {
+import type {
   DataStyleConfig,
   DisplayConfig,
   EffectsConfig,
@@ -14,7 +14,7 @@ import {
 import { home } from "./index";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL: string = "https://csrahman.github.io";
+const baseURL: string = "https://mhrahman.com";
 
 const routes: RoutesConfig = {
   "/": true,
@@ -39,25 +39,27 @@ const display: DisplayConfig = {
 const protectedRoutes: ProtectedRoutesConfig = {};
 
 // Import and set font for each variant
-import { Geist } from "next/font/google";
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Merriweather, Montserrat } from "next/font/google";
 
-const heading = Geist({
+const heading = Merriweather({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "700", "900"],
 });
 
-const body = Geist({
+const body = Montserrat({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const label = Geist({
+const label = Montserrat({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 const code = Geist_Mono({
@@ -76,13 +78,13 @@ const fonts: FontsConfig = {
 // default customization applied to the HTML in the main layout.tsx
 const style: StyleConfig = {
   theme: "system", // dark | light | system
-  neutral: "gray", // sand | gray | slate | mint | rose | dusk | custom
-  brand: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
-  accent: "red", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
+  neutral: "slate", // sand | gray | slate | mint | rose | dusk | custom
+  brand: "blue", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
+  accent: "aqua", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
-  border: "playful", // rounded | playful | conservative | sharp
-  surface: "translucent", // filled | translucent
+  border: "rounded", // rounded | playful | conservative | sharp
+  surface: "filled", // filled | translucent
   transition: "all", // all | micro | macro
   scaling: "100", // 90 | 95 | 100 | 105 | 110
 };
@@ -193,6 +195,7 @@ const schema: SchemaConfig = {
   name: "Md Habibur Rahman",
   description: home.description,
   email: "mhrahman.cs@gmail.com",
+  alternateEmail: "mrahm015@odu.edu",
 };
 
 // Social links used for schema.org structured data (SEO)
@@ -200,6 +203,10 @@ const sameAs: SameAsConfig = {
   threads: "", // Add your Threads profile URL here
   linkedin: "https://www.linkedin.com/in/habiburx/",
   discord: "",
+  github: "https://github.com/habiburx",
+  orcid: "https://orcid.org/0009-0000-3395-751X",
+  scholar: "https://scholar.google.com/citations?user=F4vGKhgAAAAJ&hl=en&authuser=1",
+  x: "https://x.com/mhabiburx",
 };
 
 // social sharing configuration for blog posts

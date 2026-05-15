@@ -10,16 +10,28 @@
 /* ── Avatar photo ─────────────────────────────────────────────── */
 
 .avatar {
-    width: 240px;     /* desktop photo width  — change to resize */
-    height: 240px;    /* desktop photo height — keep equal for square */
+    width: 360px;     /* desktop photo width  — change to resize */
+    height: 270px;    /* desktop photo height */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-    margin: 20px;
+    margin: 24px 20px;
+    border: 1px solid var(--neutral-alpha-weak);
     border-radius: 12px;
     overflow: hidden;
+    background:
+        linear-gradient(
+            145deg,
+            color-mix(in srgb, var(--portfolio-border) 14%, var(--portfolio-card-bg)) 0%,
+            var(--portfolio-card-bg) 56%,
+            color-mix(in srgb, var(--portfolio-border) 8%, var(--portfolio-card-bg)) 100%
+        );
 
     /* Mobile: smaller square, centered */
     @include bp.s {
-        width: 140px;
+        width: 220px;
         height: 140px;
         margin: 24px auto 8px;
         align-self: center;
@@ -29,7 +41,8 @@
 .avatarImg {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* crops to fill without distorting */
+    object-fit: contain;  /* fallback; profile-card.ts can override this */
+    object-position: center center;
     display: block;
 }
 
@@ -49,16 +62,34 @@
 
 /* Social link buttons row */
 .socialRow {
+    margin-top: 6px;
+
     @include bp.s {
         justify-content: center;
     }
 }
 
+.socialButton {
+    background: transparent !important;
+    color: var(--portfolio-name-color) !important;
+    border: 1px solid var(--neutral-alpha-medium) !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.socialButton:hover {
+    background: color-mix(in srgb, var(--portfolio-border) 10%, transparent) !important;
+    border-color: var(--portfolio-border) !important;
+    transform: translateY(-1px);
+}
+
 /* Name heading */
 .name {
     font-size: 34px;  /* change to resize the name */
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    line-height: 1.12;
     color: var(--portfolio-name-color); /* defined in custom.css Section 2 */
 
     @include bp.s {

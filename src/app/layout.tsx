@@ -4,17 +4,28 @@ import "@/resources/custom.css";
 
 import classNames from "classnames";
 
+import { Footer, Header, ProfileCardWrapper, Providers, RouteGuard } from "@/components";
+import {
+  baseURL,
+  dataStyle,
+  effects,
+  fonts,
+  home,
+  person,
+  sameAs,
+  schema,
+  style,
+} from "@/resources";
 import {
   Background,
   Column,
   Flex,
   Meta,
-  opacity,
   RevealFx,
-  SpacingToken,
+  Schema,
+  type SpacingToken,
+  type opacity,
 } from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers, ProfileCardWrapper } from "@/components";
-import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -23,6 +34,8 @@ export async function generateMetadata() {
     baseURL: baseURL,
     path: home.path,
     image: home.image,
+    robots: "index,follow",
+    alternates: [{ hrefLang: "en-US", href: baseURL }],
   });
 }
 
@@ -47,6 +60,7 @@ export default async function RootLayout({
       <head>
         <script
           id="theme-init"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: This static boot script applies saved theme before hydration.
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -155,6 +169,21 @@ export default async function RootLayout({
               }}
             />
           </RevealFx>
+
+          <Schema
+            as="website"
+            baseURL={baseURL}
+            path={home.path}
+            title={schema.name}
+            description={schema.description}
+            image={home.image}
+            sameAs={Object.values(sameAs)}
+            author={{
+              name: person.name,
+              url: baseURL,
+              image: `${baseURL}${person.avatar}`,
+            }}
+          />
 
           <ProfileCardWrapper />
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Flex } from "@once-ui-system/core";
 import { ProfileCard } from "@/components";
+import { Flex } from "@once-ui-system/core";
+import { usePathname } from "next/navigation";
 
 const HIDE_PATTERNS = [/^\/blogs\/.+/, /^\/publications\/.+/];
 

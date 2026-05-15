@@ -1,13 +1,13 @@
-import { Column, Meta, Schema } from "@once-ui-system/core";
-import { baseURL, person } from "@/resources";
 import { PublicationsView } from "@/features/publications";
+import { baseURL, blog, person, sameAs } from "@/resources";
+import { Column, Meta, Schema } from "@once-ui-system/core";
 
 export async function generateMetadata() {
   return Meta.generate({
-    title: "Publications",
-    description: "Research publications by Md Habibur Rahman",
+    title: blog.title,
+    description: blog.description,
     baseURL: baseURL,
-    path: "/publications",
+    path: blog.path,
   });
 }
 
@@ -17,12 +17,13 @@ export default function PublicationsPage() {
       <Schema
         as="webPage"
         baseURL={baseURL}
-        title="Publications"
-        description="Research publications by Md Habibur Rahman"
-        path="/publications"
+        title={blog.title}
+        description={blog.description}
+        path={blog.path}
+        sameAs={Object.values(sameAs)}
         author={{
           name: person.name,
-          url: `${baseURL}/publications`,
+          url: `${baseURL}${blog.path}`,
           image: `${baseURL}${person.avatar}`,
         }}
       />
