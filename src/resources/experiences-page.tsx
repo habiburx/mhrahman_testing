@@ -25,6 +25,7 @@ type ExperiencesPageContent = {
     items: Array<{
       role: string;
       organization: string;
+      link?: string;
     }>;
   };
   teaching: {
@@ -56,7 +57,7 @@ const experiencesPageContent: ExperiencesPageContent = {
     title: "Educational Background",
     institutions: [
       {
-        name: "PhD in Computer Science — Old Dominion University, USA",
+        name: "PhD in Computer Science — Old Dominion University, United States of America",
         timeframe: "In Progress",
         courses: <>Relevant Coursework: LLM Architecture &amp; Application, Research Methods.</>,
       },
@@ -111,10 +112,12 @@ const experiencesPageContent: ExperiencesPageContent = {
     display: true,
     title: "Services",
     items: [
-      { role: "Lecturer", organization: "Institute of Science & Technology" },
-      { role: "Website Developer", organization: "Supabex" },
-      { role: "Instructor & Content Creator", organization: "IshQool" },
-      { role: "Teaching Assistant", organization: "Daffodil International University" },
+      { role: "Graduate Teaching Assistant", organization: "Old Dominion University", link: "https://www.odu.edu/" },
+      { role: "Graduate Research Assistant", organization: "Old Dominion University", link: "https://www.odu.edu/" },
+      { role: "Lecturer", organization: "Institute of Science & Technology", link: "https://ist.edu.bd/" },
+      { role: "Website Developer", organization: "Supabex", link: "https://supabex.com/" },
+      { role: "Instructor & Content Creator", organization: "IshQool", link: "https://www.facebook.com/ishqool.org/" },
+      { role: "Teaching Assistant", organization: "Daffodil International University", link: "https://daffodilvarsity.edu.bd/" },
       // Add more entries by copying the block above
     ],
   },

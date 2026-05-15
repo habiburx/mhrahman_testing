@@ -56,6 +56,17 @@
   background-color: var(--portfolio-card-bg);
 }
 
+/* Tablet (769 – 1024 px): wider cards and content */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .page-card         { width: 95%; }
+  .content-width     { width: 95%; }
+  .footer-inner      { width: 95%; }
+  .blog-post-layout  { width: 95%; }
+  .blog-post-body    { gap: 32px; }
+  .nav-pill-width    { width: 95%; }
+  .header-offset     { height: 320px; }
+}
+
 /* ── SECTION 4: SOCIAL BUTTONS ───────────────────────────────────
    Social button styles are in ProfileCard.module.scss (.socialButton) */
 
@@ -105,6 +116,40 @@
   }
   .card-header {
     padding: 16px 16px 12px !important;
+  }
+
+  /* Profile card right-side spacer: hide on mobile (layout is column) */
+  .profile-card-spacer {
+    display: none !important;
+  }
+
+  /* Publications: stack year label above papers on mobile */
+  .pub-year-group {
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+  .pub-year-col {
+    width: auto !important;
+  }
+
+  /* Blog list: give title more room on small screens */
+  .blog-list-date {
+    min-width: 60px;
+  }
+  .blog-list-row {
+    padding: 10px 16px;
+  }
+
+  /* Blog post: tighten gap when TOC and article are stacked */
+  .blog-post-body {
+    gap: 24px;
+  }
+
+  /* News items: tighter padding on mobile */
+  .news-item-row {
+    padding: 10px 0;
   }
 }
 
@@ -178,6 +223,23 @@ body {
   padding-top: 0;
 }
 
+/* Two-column grid for bulleted experience items */
+.two-col-items {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+}
+.two-col-items > :nth-child(-n+2) .card-item-inner {
+  padding-top: 16px;
+}
+@media (max-width: 768px) {
+  .two-col-items {
+    grid-template-columns: 1fr !important;
+  }
+  .two-col-items > :nth-child(2) .card-item-inner {
+    padding-top: 0;
+  }
+}
+
 /* Main page column: 80% on desktop, 100% on mobile */
 .content-width {
   width: 80%;
@@ -198,6 +260,7 @@ body {
   text-align: justify;
   hyphens: auto;
   line-height: 1.75;
+  font-weight: 500;
 }
 
 /* Work article — centred with auto margins */
@@ -271,6 +334,7 @@ body {
 /* Profile card text */
 .profile-text {
   font-size: 15px !important;
+  font-weight: 500;
   line-height: 1.55;
 }
 
@@ -326,6 +390,7 @@ body {
 .research-heading {
   font-weight: 900 !important;
   line-height: 1.18 !important;
+  color: var(--portfolio-name-color) !important;
 }
 
 /* ── SECTION 10: LATEST / NEWS PAGE ─────────────────────────────── */
@@ -334,9 +399,10 @@ body {
 .news-date {
   min-width: 58px;
   font-size: 12px !important;
-  font-weight: 600;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   text-transform: uppercase;
+  color: var(--portfolio-border) !important;
 }
 
 /* Each news row */
@@ -367,6 +433,7 @@ body {
 /* News item description text */
 .news-content {
   line-height: 1.55;
+  font-weight: 500;
 }
 
 /* Category tag (shared) */
@@ -383,9 +450,23 @@ body {
 
 /* ── SECTION 11: EXPERIENCES PAGE ───────────────────────────────── */
 
+.exp-bullet {
+  color: var(--portfolio-border) !important;
+}
+
+.exp-company {
+  font-weight: 500;
+}
+
+.exp-timeframe {
+  font-weight: 600;
+  color: var(--portfolio-border) !important;
+}
+
 .exp-section-heading {
   font-weight: 900 !important;
   line-height: 1.18 !important;
+  color: var(--portfolio-name-color) !important;
 }
 
 /* ── SECTION 12: PUBLICATIONS PAGE ──────────────────────────────── */
@@ -394,6 +475,7 @@ body {
 .pub-page-title {
   font-weight: 900 !important;
   line-height: 1.18 !important;
+  color: var(--portfolio-name-color) !important;
 }
 
 /* Filter + search combined row */
@@ -412,6 +494,7 @@ body {
   padding: 4px 14px;
   border-radius: 20px;
   font-size: 13px;
+  font-weight: 600;
   color: inherit;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
 }
@@ -475,11 +558,32 @@ body {
 /* Title */
 .pub-title {
   line-height: 1.35;
+  font-weight: 700 !important;
+}
+
+/* Authors line */
+.pub-authors {
+  font-weight: 500;
 }
 
 /* Own name bolded in accent color */
 .pub-my-name {
   color: var(--brand-primary);
+  font-weight: 700;
+}
+
+/* Research area keyword tags — shown below the title */
+.pub-keyword-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 30%, transparent);
+  background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+  color: var(--portfolio-name-color);
 }
 
 /* Link buttons (ARXIV, CODE, PDF, DOI, SLIDES…) */
@@ -525,11 +629,13 @@ body {
   font-variant-numeric: tabular-nums;
   min-width: 88px;
   font-size: 12px !important;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--portfolio-border) !important;
 }
 .blog-list-title {
   min-width: 0;
   line-height: 1.45;
+  font-weight: 600;
 }
 .blog-list-arrow {
   flex-shrink: 0;

@@ -31,7 +31,14 @@
             color-mix(in srgb, var(--portfolio-border) 8%, var(--portfolio-card-bg)) 100%
         );
 
+    @include bp.m {
+        width: 220px;
+        height: 220px;
+    }
+
     @include bp.s {
+        width: 200px;
+        height: 200px;
         margin: 20px auto;
         align-self: center;
     }

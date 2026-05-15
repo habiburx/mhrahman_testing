@@ -1,6 +1,6 @@
 import { baseURL, person, sameAs, work } from "@/resources";
 import { experiencesPageContent } from "@/resources/experiences-page";
-import { Column, Heading, Line, Meta, Row, Schema, Text } from "@once-ui-system/core";
+import { Column, Heading, Line, Meta, Row, Schema, SmartLink, Text } from "@once-ui-system/core";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -35,7 +35,98 @@ export default function Experiences() {
         fillWidth
         className="page-card"
       >
+        {/* ── Services ── */}
+        <Column className="card-header">
+          <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
+            {experiencesPageContent.services.title}
+          </Heading>
+        </Column>
+        <Line background="neutral-alpha-weak" />
+        <div className="card-section-items card-body two-col-items">
+          {experiencesPageContent.services.items.map((svc) => (
+            <Column key={`${svc.role}-${svc.organization}`} fillWidth>
+              <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
+                <Text variant="body-default-m" onBackground="neutral-weak" className="exp-bullet">
+                  ·
+                </Text>
+                <Text variant="body-default-s" className="exp-company">
+                  <strong>{svc.role}</strong>,{" "}
+                  {svc.link ? (
+                    <SmartLink href={svc.link}>{svc.organization}</SmartLink>
+                  ) : (
+                    svc.organization
+                  )}
+                </Text>
+              </Row>
+            </Column>
+          ))}
+        </div>
+
+        {/* ── Teaching ── */}
+        {experiencesPageContent.teaching.display && (
+          <>
+            <Line background="neutral-alpha-weak" />
+            <Column className="card-header">
+              <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
+                {experiencesPageContent.teaching.title}
+              </Heading>
+            </Column>
+            <Line background="neutral-alpha-weak" />
+            <div className="card-section-items card-body two-col-items">
+              {experiencesPageContent.teaching.courses.map((course) => (
+                <Column key={`${course.name}-${course.session}`} fillWidth>
+                  <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
+                    <Text
+                      variant="body-default-m"
+                      onBackground="neutral-weak"
+                      className="exp-bullet"
+                    >
+                      ·
+                    </Text>
+                    <Text variant="body-default-s" className="exp-company">
+                      <strong>{course.name}</strong> — {course.session}
+                      {course.note && <> ({course.note})</>}
+                    </Text>
+                  </Row>
+                </Column>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* ── Student Mentored ── */}
+        {experiencesPageContent.studentMentored.display && (
+          <>
+            <Line background="neutral-alpha-weak" />
+            <Column className="card-header">
+              <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
+                {experiencesPageContent.studentMentored.title}
+              </Heading>
+            </Column>
+            <Line background="neutral-alpha-weak" />
+            <div className="card-section-items card-body two-col-items">
+              {experiencesPageContent.studentMentored.items.map((item) => (
+                <Column key={item} fillWidth>
+                  <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
+                    <Text
+                      variant="body-default-m"
+                      onBackground="neutral-weak"
+                      className="exp-bullet"
+                    >
+                      ·
+                    </Text>
+                    <Text variant="body-default-s" className="exp-company">
+                      {item}
+                    </Text>
+                  </Row>
+                </Column>
+              ))}
+            </div>
+          </>
+        )}
+
         {/* ── Educational Background ── */}
+        <Line background="neutral-alpha-weak" />
         <Column className="card-header">
           <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
             {experiencesPageContent.studies.title}
@@ -75,116 +166,6 @@ export default function Experiences() {
             </Column>
           ))}
         </Column>
-
-        {/* ── Research Experience ── */}
-        <Line background="neutral-alpha-weak" />
-        <Column className="card-header">
-          <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
-            {experiencesPageContent.research.title}
-          </Heading>
-        </Column>
-        <Line background="neutral-alpha-weak" />
-        <Column className="card-section-items card-body" gap="0">
-          {experiencesPageContent.research.experiences.map((exp) => (
-            <Column key={exp.role} fillWidth>
-              <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
-                <Text variant="body-default-m" onBackground="neutral-weak" className="exp-bullet">
-                  ·
-                </Text>
-                <Text variant="body-default-s" className="exp-company">
-                  <strong>{exp.role}</strong>
-                  {exp.achievement && <> – {exp.achievement}</>}
-                </Text>
-              </Row>
-            </Column>
-          ))}
-        </Column>
-
-        {/* ── Services ── */}
-        <Line background="neutral-alpha-weak" />
-        <Column className="card-header">
-          <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
-            {experiencesPageContent.services.title}
-          </Heading>
-        </Column>
-        <Line background="neutral-alpha-weak" />
-        <Column className="card-section-items card-body" gap="0">
-          {experiencesPageContent.services.items.map((svc) => (
-            <Column key={`${svc.role}-${svc.organization}`} fillWidth>
-              <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
-                <Text variant="body-default-m" onBackground="neutral-weak" className="exp-bullet">
-                  ·
-                </Text>
-                <Text variant="body-default-s" className="exp-company">
-                  <strong>{svc.role}</strong>, {svc.organization}
-                </Text>
-              </Row>
-            </Column>
-          ))}
-        </Column>
-
-        {/* ── Teaching ── */}
-        {experiencesPageContent.teaching.display && (
-          <>
-            <Line background="neutral-alpha-weak" />
-            <Column className="card-header">
-              <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
-                {experiencesPageContent.teaching.title}
-              </Heading>
-            </Column>
-            <Line background="neutral-alpha-weak" />
-            <Column className="card-section-items card-body" gap="0">
-              {experiencesPageContent.teaching.courses.map((course) => (
-                <Column key={`${course.name}-${course.session}`} fillWidth>
-                  <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
-                    <Text
-                      variant="body-default-m"
-                      onBackground="neutral-weak"
-                      className="exp-bullet"
-                    >
-                      ·
-                    </Text>
-                    <Text variant="body-default-s" className="exp-company">
-                      <strong>{course.name}</strong> — {course.session}
-                      {course.note && <> ({course.note})</>}
-                    </Text>
-                  </Row>
-                </Column>
-              ))}
-            </Column>
-          </>
-        )}
-
-        {/* ── Student Mentored ── */}
-        {experiencesPageContent.studentMentored.display && (
-          <>
-            <Line background="neutral-alpha-weak" />
-            <Column className="card-header">
-              <Heading as="h2" variant="heading-strong-l" className="exp-section-heading">
-                {experiencesPageContent.studentMentored.title}
-              </Heading>
-            </Column>
-            <Line background="neutral-alpha-weak" />
-            <Column className="card-section-items card-body" gap="0">
-              {experiencesPageContent.studentMentored.items.map((item) => (
-                <Column key={item} fillWidth>
-                  <Row fillWidth gap="16" vertical="start" className="card-item-inner exp-item">
-                    <Text
-                      variant="body-default-m"
-                      onBackground="neutral-weak"
-                      className="exp-bullet"
-                    >
-                      ·
-                    </Text>
-                    <Text variant="body-default-s" className="exp-company">
-                      {item}
-                    </Text>
-                  </Row>
-                </Column>
-              ))}
-            </Column>
-          </>
-        )}
       </Column>
     </Column>
   );

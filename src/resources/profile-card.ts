@@ -24,7 +24,7 @@ const person: Person = {
   scholar: "https://scholar.google.com/citations?user=F4vGKhgAAAAJ&hl=en&authuser=1",
   email: "mrahm015@odu.edu",
   personalEmail: "mhrahman.cs@gmail.com",
-  address: "Norfolk, VA, USA",
+  address: "Norfolk, VA, United States of America",
   // location: "America/New_York", // IANA time zone identifier — uncomment to show local time
   languages: [], // e.g. ["English", "Bengali"] — leave empty to hide
 };

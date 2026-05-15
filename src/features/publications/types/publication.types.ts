@@ -19,5 +19,6 @@ export type Publication = {
   authors: string[];
   venue: string;
   type: PublicationType;
+  keywords?: string[];
   links?: PublicationLink[];
 };

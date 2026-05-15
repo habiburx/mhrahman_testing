@@ -47,7 +47,7 @@ const gallery: Gallery = {
       alt: "Campus view",
       orientation: "horizontal",
       caption: "Old Dominion University Campus",
-      location: "Norfolk, Virginia, USA",
+      location: "Norfolk, Virginia, United States of America",
     },
     {
       src: "/images/gallery/vertical-1.jpg",

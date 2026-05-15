@@ -145,7 +145,7 @@ export const Header = () => {
                   <Line background="neutral-alpha-medium" vert />
                   <NavTab
                     href="/experiences"
-                    icon="grid"
+                    icon="briefcase"
                     label={work.label}
                     active={pathname.startsWith("/experiences")}
                   />

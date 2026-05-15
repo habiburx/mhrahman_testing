@@ -38,7 +38,8 @@ export function PublicationsView() {
         !q ||
         p.title.toLowerCase().includes(q) ||
         p.authors.some((a) => a.toLowerCase().includes(q)) ||
-        p.venue.toLowerCase().includes(q);
+        p.venue.toLowerCase().includes(q) ||
+        p.keywords?.some((k) => k.toLowerCase().includes(q));
       const matchesType = !activeType || p.type === activeType;
       return matchesQuery && matchesType;
     });
@@ -132,9 +133,15 @@ export function PublicationsView() {
                         <Text variant="body-strong-m" className="pub-title">
                           {pub.title}
                         </Text>
+                        {pub.keywords && pub.keywords.length > 0 && (
+                          <Row gap="6" wrap className="pub-keywords">
+                            {pub.keywords.map((kw) => (
+                              <span key={kw} className="pub-keyword-tag">{kw}</span>
+                            ))}
+                          </Row>
+                        )}
                         <Text
                           variant="body-default-s"
-                          onBackground="neutral-weak"
                           className="pub-authors"
                         >
                           {renderAuthors(pub.authors)}
