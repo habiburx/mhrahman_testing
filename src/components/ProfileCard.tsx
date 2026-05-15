@@ -1,5 +1,5 @@
 import { person, social } from "@/resources";
-import { Button, Column, Row, Text } from "@once-ui-system/core";
+import { Button, Column, Row, SmartLink, Text } from "@once-ui-system/core";
 import styles from "./ProfileCard.module.scss";
 import { ScholarStats } from "./ScholarStats";
 
@@ -38,9 +38,17 @@ export function ProfileCard() {
           </Text>
         ))}
         {person.address && <Text className="profile-text">{person.address}</Text>}
-        {person.email && <Text className="profile-text">Academic: {person.email}</Text>}
+        {person.email && (
+          <Text className="profile-text">
+            <strong>Academic:</strong>{" "}
+            <SmartLink href={`mailto:${person.email}`}>{person.email}</SmartLink>
+          </Text>
+        )}
         {person.personalEmail && (
-          <Text className="profile-text">Personal: {person.personalEmail}</Text>
+          <Text className="profile-text">
+            <strong>Personal:</strong>{" "}
+            <SmartLink href={`mailto:${person.personalEmail}`}>{person.personalEmail}</SmartLink>
+          </Text>
         )}
         {social.filter((item) => item.essential).length > 0 && (
           <Row gap="8" wrap paddingTop="4" className={`social-buttons ${styles.socialRow}`}>

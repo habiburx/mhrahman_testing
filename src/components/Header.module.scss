@@ -111,6 +111,9 @@
 
 .themeToggle {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 2px;
 
     :global(.button) {
         width: auto !important;
@@ -118,6 +121,17 @@
         min-height: var(--static-space-32) !important;
         border-radius: var(--radius-m) !important;
         padding: var(--static-space-4) var(--static-space-8) !important;
+    }
+
+    /* On mobile, keep both icons compact inside the fixed bottom bar */
+    @media (max-width: 768px) {
+        padding-left: 4px;
+        padding-right: 4px;
+
+        :global(.button) {
+            min-height: 36px !important;
+            padding: 4px 6px !important;
+        }
     }
 }
 
@@ -130,4 +144,13 @@
 :global([data-theme="dark"]) .themeToggle :global(.button) {
     --neutral-on-background-strong: #ffffff;
     --neutral-on-background-medium: #ffffff;
+}
+
+/* Prevent the nav-wide hover rule from turning the scroll-to-top arrow white */
+:global([data-theme="light"]) .themeToggle :global(.button):hover {
+    color: #000000 !important;
+}
+
+:global([data-theme="dark"]) .themeToggle :global(.button):hover {
+    color: #ffffff !important;
 }

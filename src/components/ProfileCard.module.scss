@@ -10,8 +10,8 @@
 /* ── Avatar photo ─────────────────────────────────────────────── */
 
 .avatar {
-    width: 360px;     /* desktop photo width  — change to resize */
-    height: 270px;    /* desktop photo height */
+    width: 270px;
+    height: 270px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -19,8 +19,10 @@
     flex-shrink: 0;
     margin: 24px 20px;
     border: 1px solid var(--neutral-alpha-weak);
+    border-left: 4px solid var(--portfolio-border);
     border-radius: 12px;
     overflow: hidden;
+    background-color: var(--portfolio-card-bg);
     background:
         linear-gradient(
             145deg,
@@ -29,11 +31,8 @@
             color-mix(in srgb, var(--portfolio-border) 8%, var(--portfolio-card-bg)) 100%
         );
 
-    /* Mobile: smaller square, centered */
     @include bp.s {
-        width: 220px;
-        height: 140px;
-        margin: 24px auto 8px;
+        margin: 20px auto;
         align-self: center;
     }
 }
@@ -41,7 +40,7 @@
 .avatarImg {
     width: 100%;
     height: 100%;
-    object-fit: contain;  /* fallback; profile-card.ts can override this */
+    object-fit: contain;
     object-position: center center;
     display: block;
 }
@@ -52,7 +51,6 @@
 .info {
     padding: 20px;
 
-    /* Mobile: center-align every line */
     @include bp.s {
         align-items: center;
         text-align: center;
@@ -86,11 +84,11 @@
 
 /* Name heading */
 .name {
-    font-size: 34px;  /* change to resize the name */
+    font-size: 34px;
     font-family: var(--font-heading);
     font-weight: 900;
     line-height: 1.12;
-    color: var(--portfolio-name-color); /* defined in custom.css Section 2 */
+    color: var(--portfolio-name-color);
 
     @include bp.s {
         font-size: 26px;

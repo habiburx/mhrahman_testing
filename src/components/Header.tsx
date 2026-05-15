@@ -203,9 +203,11 @@ export const Header = () => {
                     hide
                     s={{ hide: false }}
                     paddingX="8"
+                    gap="4"
                     vertical="center"
                     className={styles.themeToggle}
                   >
+                    <ThemeToggle />
                     <IconButton
                       icon="arrowUp"
                       variant="ghost"

@@ -2,9 +2,10 @@ import { person, social } from "@/resources";
 import { IconButton, Row, SmartLink, Text } from "@once-ui-system/core";
 
 export const Footer = () => {
+  const footerLinks = social.filter((item) => item.link);
+
   return (
-    <Row as="footer" fillWidth paddingY="8" horizontal="center">
-      {/* Footer bar — same 80 % width as the navbar */}
+    <Row as="footer" fillWidth paddingY="8" horizontal="center" className="footer-bar">
       <Row
         paddingY="12"
         paddingX="16"
@@ -16,27 +17,27 @@ export const Footer = () => {
         {/* Copyright + name link */}
         <Text variant="body-default-s" onBackground="neutral-weak">
           ©{" "}
-          <SmartLink href="/">
+          <SmartLink href="/" className="footer-name-link">
             <Text as="span" onBackground="neutral-strong">
               {person.name}
             </Text>
           </SmartLink>
+          {" "}{new Date().getFullYear()}
         </Text>
 
-        {/* Social icon links */}
-        <Row gap="8">
-          {social.map((item) =>
-            item.link ? (
-              <IconButton
-                key={item.name}
-                href={item.link}
-                icon={item.icon}
-                tooltip={item.name}
-                size="s"
-                variant="ghost"
-              />
-            ) : null,
-          )}
+        {/* Non-essential social icon links (essential ones live on the profile card) */}
+        <Row gap="8" wrap horizontal="center">
+          {footerLinks.map((item) => (
+            <IconButton
+              key={item.name}
+              href={item.link}
+              icon={item.icon}
+              tooltip={item.name}
+              size="s"
+              variant="ghost"
+              className="footer-icon"
+            />
+          ))}
         </Row>
       </Row>
 

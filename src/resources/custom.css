@@ -52,22 +52,12 @@
 .page-card {
   width: 80%;
   border-top: 4px solid var(--portfolio-border);
+  border-bottom: 4px solid var(--portfolio-border);
   background-color: var(--portfolio-card-bg);
 }
 
 /* ── SECTION 4: SOCIAL BUTTONS ───────────────────────────────────
-   The link buttons (GitHub, LinkedIn, etc.) on the profile card. */
-
-.social-buttons .button:not([class*="socialButton"]) {
-  background-color: var(--brand-primary) !important;
-  color: var(--brand-text-on) !important;
-  border-color: var(--brand-primary) !important;
-}
-
-.social-buttons .button:not([class*="socialButton"]):hover {
-  background-color: var(--brand-primary-dark) !important;
-  border-color: var(--brand-primary-dark) !important;
-}
+   Social button styles are in ProfileCard.module.scss (.socialButton) */
 
 /* ── SECTION 5: MOBILE / RESPONSIVE (≤ 768 px) ──────────────────
    Adjustments for phones and small tablets.
@@ -83,7 +73,38 @@
   /* Push page content above the fixed bottom navbar.
      env(safe-area-inset-bottom) adds clearance for the iPhone home bar. */
   body {
-    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Prevent long email addresses from overflowing the profile card */
+  .profile-text a {
+    word-break: break-all;
+  }
+
+  /* Social buttons: wrap cleanly and shrink label font on very small screens */
+  .social-buttons {
+    justify-content: center;
+  }
+  .social-buttons .button {
+    font-size: 11px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  /* Footer: ensure icon row wraps and stays centered */
+  .footer-inner {
+    align-items: center !important;
+  }
+
+  /* Tighten card body padding on small screens */
+  .card-body-padded {
+    padding: 16px !important;
+  }
+  .card-body {
+    padding: 8px 16px 16px !important;
+  }
+  .card-header {
+    padding: 16px 16px 12px !important;
   }
 }
 
@@ -195,6 +216,20 @@ body {
   width: fit-content !important;
 }
 
+/* Footer bar — gradient-fade accent border */
+.footer-bar {
+  border-top: 4px solid transparent;
+  border-image: linear-gradient(
+    to right,
+    transparent,
+    var(--portfolio-border) 20%,
+    var(--portfolio-border) 80%,
+    transparent
+  ) 1;
+  background-color: var(--portfolio-card-bg);
+  overflow: visible;
+}
+
 /* Footer inner row */
 .footer-inner {
   width: 80%;
@@ -203,6 +238,29 @@ body {
   .footer-inner {
     width: 100%;
   }
+}
+
+/* Footer name link */
+.footer-name-link span {
+  color: var(--portfolio-name-color) !important;
+  font-weight: 600;
+}
+.footer-name-link:hover span {
+  text-decoration: underline;
+}
+
+/* Footer social icon color — idle and hover both use the same brand color */
+.footer-icon svg,
+.footer-icon [data-icon] {
+  color: var(--portfolio-border) !important;
+  fill: var(--portfolio-border) !important;
+  transition: opacity 0.15s ease;
+}
+.footer-icon:hover svg,
+.footer-icon:hover [data-icon] {
+  color: var(--portfolio-border) !important;
+  fill: var(--portfolio-border) !important;
+  opacity: 0.7;
 }
 
 /* Footer mobile spacer (clears the fixed bottom navbar) */
